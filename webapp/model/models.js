@@ -13,7 +13,7 @@ sap.ui.define([
 		},
 		createWorkcenterModel: function() {
 			var oModel = new JSONModel();
-			oModel.setDefaultBindingMode("OneTime");
+			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		},
 		createRoutingModel: function() {
@@ -22,6 +22,11 @@ sap.ui.define([
 			return oModel;
 		},
 		createTemplateModel: function() {
+			var oModel = new JSONModel();
+			oModel.setDefaultBindingMode("OneWay");
+			return oModel;
+		},
+		createTemplateItemsModel: function() {
 			var oModel = new JSONModel();
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;

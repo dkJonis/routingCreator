@@ -26,6 +26,7 @@ sap.ui.define([
 			this.setModel(models.createWorkcenterModel(), "workcenter");
 			this.setModel(models.createRoutingModel(), "routing");
 			this.setModel(models.createTemplateModel(), "template");
+			this.setModel(models.createTemplateItemsModel(), "templateItems");
 			
 			this.getRouter().initialize();
 		}

@@ -18,7 +18,7 @@
 		</f:SimpleForm>
 		</content>
 		<beginButton>
-			<Button id="Continue" text="Continue" press="Continue" type="Accept" />
+			<Button id="Continue" text="Continue" press="continue" type="Accept" />
 		</beginButton>
 	</Dialog>
 </core:FragmentDefinition>

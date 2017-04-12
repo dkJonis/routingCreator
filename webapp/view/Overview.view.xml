@@ -6,9 +6,9 @@
 					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="__header1" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true"/>
 					<HBox fitContainer="true" displayInline="true">
 						<VBox id="leftBox">
-							<Button id="addWorkcenter" text="add workcenter" press="addItemToTable" type="default"/>
+							<Button id="addWorkcenter" text="add workcenter" press="_onAddWorkcenter" type="default"/>
 							<ScrollContainer vertical="true" height="85%" width="100%" headerText="Workcenters">
-								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" headerText="Workcenters" includeItemInSelection="true" mode="SingleSelectMaster" keyboardMode="Edit" backgroundDesign="Transparent">
+								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" headerText="Workcenters" includeItemInSelection="true" mode="SingleSelectMaster" backgroundDesign="Transparent" rememberSelections="false">
 									<!--<headerToolbar> items="{list>/}"
 								<Toolbar>
 									<Title text="Workcenters" level="H4"/>
@@ -96,9 +96,9 @@
 							</customData>
 							</Table>
 							<CheckBox name="checkOverwrite" text="Overwrite existing operations"/>
-							<Button id="AddTemplate" text="Add to routings" press="onAddToRoutings" type="default"/>
+							<Button id="AddTemplate" text="Add to routings" press="_onAddTemplate" type="default"/>
 							<ComboBox id="comboTemplate" placeholder="Choose a template..." items="{template>/}">
-								<core:ListItem key="{template>routingGroupCode}" text="{template>routingGroupCounter} {template&gt;description}"/>
+								<core:ListItem key="{template>routingGroupCode}" text="0{template>routingGroupCounter} {template&gt;description}"/>
 							</ComboBox>
 						</VBox>
 					</HBox>

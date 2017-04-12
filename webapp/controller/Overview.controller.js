@@ -42,7 +42,7 @@ sap.ui.define([
 
 			oDialog.open();
 		},
-		Continue: function() {
+		continue: function() {
 
 			var sMatnr = oView.byId("p_materialNumber").getValue();
 			var sPlant = oView.byId("p_plant").getValue();
@@ -72,23 +72,36 @@ sap.ui.define([
 
 		},
 		updateTableHeader: function() {
-			oView.getModel("routing").setHeaderText("Operations(" + oView.getModel("routing").getItems().length + ")");
-			console.log(oView.getModel("routing").getItems().length);
+			oRoutingTable.setHeaderText("Operations(" + oRoutingTable.getItems().length + ")");
+			console.log(oRoutingTable.getItems().length);
 		},
 		// TEST
-		onAddToRoutings: function() {
-			var oSelectedItem = oView.getModel("template").getSelectedItem
+		addTemplate: function() {
+			var templateID = oView.byId("comboTemplate").getSelectedItem().getBindingContext("template").sPath;
+			console.log(templateID);
+			var oSelectedItem = oView.getModel("template").getProperty(templateID);
+			console.log(oSelectedItem);
+			var sRoutingGroupCode = oSelectedItem.routingGroupCode;
+			var sRoutingGroupCounter = oSelectedItem.routingGroupCounter;
+			console.log(oSelectedItem.routingGroupCounter);
+			
+			$.when(services.getTemplateItems(sRoutingGroupCounter, sRoutingGroupCode)).done(function(oData) {
+				oView.getModel("templateItems").setData(oData);
+				//addToRoutingTable
+			});
+			
+			console.log(oView.getModel("templateItems"));
+			console.log(oView.getModel("templateItems").getData());
+			
 		},
-		addItemToTable: function(oEvent) {
-
+		_onAddWorkcenter: function(oEvent)
+		{
 			var oWorkcList = oView.byId("WorkcenterList");
 			if (oWorkcList.getSelectedItem() === null) 
 			{
 				MessageToast.show("Please select a workcenter");
 			}
-			console.log(oWorkcList.getSelectedItem().getBindingContext("workcenter").sPath);
-			var ID = (oWorkcList.getSelectedItem().getBindingContext("workcenter").sPath); //.substr(1,1);//substr(1,1);
-			var oSelectedItem = oView.getModel("workcenter").getProperty(ID);
+			var oSelectedItem = oWorkcList.getSelectedItem().getBindingContext("workcenter").getObject();
 			console.log(oSelectedItem);
 			var addItem = {
 				operationNumber: "00" + (oRoutingTable.getItems().length + 1) + "0",
@@ -99,9 +112,39 @@ sap.ui.define([
 				machineUnit: oSelectedItem.machineUnit,
 				laborUnit: oSelectedItem.laborUnit
 			};
-			console.log(addItem);
-
-
+			this.addToRoutingTable(addItem);
+		},
+		_onAddTemplate: function(oEvent) //list afhandelen binnen deze functie, aantal keren de addToRoutingTable functie oproepen
+		{
+			var that = this;
+			var oComboTemplate = oView.byId("comboTemplate");
+			if(oComboTemplate.getSelectedItem() === null)
+			{
+				MessageToast.show("Please select a workcenter");
+			}
+			var oSelectedItem = oComboTemplate.getSelectedItem().getBindingContext("template").getObject();
+			var sRoutingGroupCode = oSelectedItem.routingGroupCode;
+			var sRoutingGroupCounter = oSelectedItem.routingGroupCounter;
+			
+			$.when(services.getTemplateItems(sRoutingGroupCounter, sRoutingGroupCode)).done(function(oData) {
+				oView.getModel("templateItems").setData(oData);
+				
+				for(var x in oView.getModel("templateItems").getData())
+				{
+					var item = oView.getModel("templateItems").getProperty("/" + x);
+					console.log(item);
+					if(item !== null)
+					{
+						//console.log(item);
+						//addToRoutingTable(item);
+						that.addToRoutingTable(item);
+					}
+					
+				}
+			});
+		},
+		addToRoutingTable: function(addItem)
+		{
 			oView.getModel("routing").getData().push(addItem);
 			
 			oView.getModel("routing").refresh(true);
@@ -109,7 +152,25 @@ sap.ui.define([
 		},
 		updateOperationNumbers: function(data)
 		{
-			console.log(data)
+			var teller = 1;
+			var item;
+			for(var x in data)
+			{
+				/*if(x === 0)
+				{
+					item = oView.getModel("routing").getProperty("/" + 0);
+					item.operationNumber = "00" + teller + "0";
+					console.log(item);
+				}
+				else if(x !== 0) {*/
+				item = oView.getModel("routing").getProperty("/" + x);
+				item.operationNumber = "00" + teller + "0";
+				//x.operationNumber =  "00" + teller + "0";
+			//}
+				teller++;
+			}
+			oView.getModel("routing").setData(data);
+			oView.getModel("routing").refresh(true);
 		},
 		DeleteSelectedRecord: function() {
 			
@@ -120,9 +181,10 @@ sap.ui.define([
 			
 			oView.getModel("routing").getData().splice(ID.substr(1,1),1);
 			oView.getModel("routing").setData(oView.getModel("routing").getData());
+			//console.log(oView.getModel("routing").getData());
 			this.updateOperationNumbers(oView.getModel("routing").getData());
 			oView.getModel("routing").refresh(true);
-
+			this.updateTableHeader();
 
 		}
 
