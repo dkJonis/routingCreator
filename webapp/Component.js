@@ -1,11 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
-	"PP_Cloostermans_routing/model/models"
+	"com/flexso/routingbuilder/model/models"
 ], function(UIComponent, Device, models) {
 	"use strict";
 
-	return UIComponent.extend("PP_Cloostermans_routing.Component", {
+	return UIComponent.extend("com.flexso.routingbuilder.Component", {
 
 		metadata: {
 			manifest: "json"
@@ -22,6 +22,10 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+			
+			this.setModel(models.createWorkcenterModel(), "workcenter");
+			this.setModel(models.createRoutingModel(), "routing");
+			this.setModel(models.createTemplateModel(), "template");
 			
 			this.getRouter().initialize();
 		}

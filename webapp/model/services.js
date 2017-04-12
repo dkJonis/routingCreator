@@ -3,14 +3,10 @@ sap.ui.define([
 	"sap/ui/model/odata/ODataModel"
 ], function(Object, ODataModel) {
 	"use strict";
-	var instance;
-	var sPlant;
-	var sMatnr;
 	var services = Object.extend("com.flexso.routingbuilder.services", {
 
 		constructor: function() {
-			sPlant = this.getView().byId("p_plant").getValue();
-			sMatnr = this.getView().byId("p_matnr").getValue();
+
 		},
 
 		setModel: function(oModel) {
@@ -21,10 +17,9 @@ sap.ui.define([
 
 		//….
 
-		getWorkcenters: function() {
+		getWorkcenters: function(sPlant) {
 			
 			var d = $.Deferred();
-
 			this.model.read("/Zppc_Cds_Workcenter(p_plant='" + sPlant + "')/Set", {
 				success: function(oData) {
 					d.resolve(oData.results);
@@ -32,13 +27,13 @@ sap.ui.define([
 			});
 			return d.promise();
 		},
-		getRoutings: function() {
+		getRoutings: function(sMatnr, sPlant) {
 			
+
 			var d = $.Deferred();
 			
 			this.model.read("/Zppc_Cds_Routing(p_matnr='" + sMatnr + "',p_plant='" + sPlant + "')/Set", {
-				success: function(oData)
-				{
+				success: function(oData){
 					d.resolve(oData.results);
 				}
 			});
@@ -56,11 +51,11 @@ sap.ui.define([
 			});
 			return d.promise();
 		},
-		getTemplateItems: function() {
+		getTemplateItems: function(counter, routingCode) {
 			
 			var d = $.Deferred();
 			
-			this.model.read("/Zppc_Cds_Templateitems", {
+			this.model.read("/Zppc_Cds_Templateitems(p_counter='" + counter + "',p_routingCode='" + routingCode + "')/Set", {
 				success: function(oData)
 				{
 					d.resolve(oData.results);
@@ -69,4 +64,7 @@ sap.ui.define([
 			return d.promise(); 
 		}
 	});
+	
+	var instance = new services();
+	return instance;
 });

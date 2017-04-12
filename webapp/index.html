@@ -12,19 +12,17 @@
 			data-sap-ui-libs="sap.m"
 			data-sap-ui-theme="sap_belize"
 			data-sap-ui-compatVersion="edge"
-			data-sap-ui-resourceroots='{"PP_Cloostermans_routing": ""}'>
+			data-sap-ui-resourceroots='{"com.flexso.routingbuilder": ""}'>
 		</script>
 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-
-		<script id="drag-drop" src="//cdnjs.cloudflare.com/ajax/libs/interact.js/1.2.6/interact.min.js"></script>
 		
 		<script>
 			sap.ui.getCore().attachInit(function() {
 				new sap.m.Shell({
 					app: new sap.ui.core.ComponentContainer({
 						height : "100%",
-						name : "PP_Cloostermans_routing"
+						name : "com.flexso.routingbuilder"
 					})
 				}).placeAt("content");
 			});

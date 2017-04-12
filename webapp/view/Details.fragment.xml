@@ -18,7 +18,7 @@
 		</f:SimpleForm>
 		</content>
 		<beginButton>
-			<Button id="Continue" text="Continue" press="Continue" type="Accept" visible="{= ${p_materialnumber} !== null &amp;&amp; ${p_plant} !== null &amp;&amp; ${p_revision} !== null }" />
+			<Button id="Continue" text="Continue" press="Continue" type="Accept" />
 		</beginButton>
 	</Dialog>
 </core:FragmentDefinition>

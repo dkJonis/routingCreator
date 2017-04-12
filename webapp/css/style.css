@@ -1,1 +1,6 @@
 /* Enter your custom styles here */
+#__xmlview0--leftBox {
+	background-color: rgba(200,200,200, 0.2);
+	border: 1px solid #cccccc;
+	border-top: none;
+}

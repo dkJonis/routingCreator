@@ -1,0 +1,188 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZROUTING_CREATOR_SRV" xml:lang="nl" sap:schema-version="1">
+            <EntityType Name="Zppc_Cds_RoutingType" sap:label="Consumption CDS routing" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_matnr"/>
+                    <PropertyRef Name="p_plant"/>
+                    <PropertyRef Name="material"/>
+                    <PropertyRef Name="plant"/>
+                    <PropertyRef Name="operationNumber"/>
+                    <PropertyRef Name="routingNumber"/>
+                </Key>
+                <Property Name="p_matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Artikel"/>
+                <Property Name="p_plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Vestiging"/>
+                <Property Name="material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Artikel" sap:quickinfo="Artikelnummer"/>
+                <Property Name="internalCounter" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Teller" sap:quickinfo="Interne teller"/>
+                <Property Name="validDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Geldig van" sap:quickinfo="Datum geldig van"/>
+                <Property Name="changeNumber" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Wijzigingsnummer"/>
+                <Property Name="creationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gecreëerd op" sap:quickinfo="Aanmaakdatum record"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gecreëerd door" sap:quickinfo="Medewerker die het record heeft gecreëerd"/>
+                <Property Name="lastChange" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gewijzigd op" sap:quickinfo="Datum van laatste wijziging"/>
+                <Property Name="lastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gewijzigd door" sap:quickinfo="Naam van medewerker die het object heeft gewijzigd"/>
+                <Property Name="controlKey" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="operationDescription" Type="Edm.String" MaxLength="40" sap:label="Omschr. operatie" sap:quickinfo="Omschrijving operatie"/>
+                <Property Name="baseQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Basishoeveelheid"/>
+                <Property Name="plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Vestiging"/>
+                <Property Name="baseUnit" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Teller" sap:quickinfo="Teller voor omrekening plan- en operatiehoeveelheidseenheid"/>
+                <Property Name="setupUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="machineUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="laborUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="setupTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="setupUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="machineTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="machineUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="laborTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="laborUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="setupActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="machineActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="laborActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="operationNumber" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Operatie" sap:quickinfo="Operatienummer"/>
+                <Property Name="object" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="routingNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Routingknooppunt" sap:quickinfo="Nummer van routingknooppunt"/>
+                <Property Name="workcenter" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Werkplek"/>
+                <Property Name="routingType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Routingtype"/>
+                <Property Name="routingGroupCode" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Routinggroep" sap:quickinfo="Code van routinggroep"/>
+                <Property Name="routingGroupCounter" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Routinggroepteller"/>
+                <Property Name="extraCounter" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative" sap:label="ExtraCrit.teller" sap:quickinfo="Teller extra criteria"/>
+                <NavigationProperty Name="Parameters" Relationship="ZROUTING_CREATOR_SRV.assoc_06B750711F8DF69595B950B801110F04" FromRole="ToRole_assoc_06B750711F8DF69595B950B801110F04" ToRole="FromRole_assoc_06B750711F8DF69595B950B801110F04" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_RoutingParameters" sap:semantics="parameters" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_matnr"/>
+                    <PropertyRef Name="p_plant"/>
+                </Key>
+                <Property Name="p_matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:parameter="mandatory" sap:label="Artikel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="p_plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:parameter="mandatory" sap:label="Vestiging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Set" Relationship="ZROUTING_CREATOR_SRV.assoc_06B750711F8DF69595B950B801110F04" FromRole="FromRole_assoc_06B750711F8DF69595B950B801110F04" ToRole="ToRole_assoc_06B750711F8DF69595B950B801110F04"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_TemplateType" sap:label="Consumption CDS templates" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="routingGroupCode"/>
+                    <PropertyRef Name="routingGroupCounter"/>
+                    <PropertyRef Name="routingType"/>
+                    <PropertyRef Name="internalCounter"/>
+                </Key>
+                <Property Name="routingGroupCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:label="Routinggroep" sap:quickinfo="Code van routinggroep"/>
+                <Property Name="routingGroupCounter" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Routinggroepteller"/>
+                <Property Name="routingType" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Routingtype"/>
+                <Property Name="internalCounter" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Teller" sap:quickinfo="Interne teller"/>
+                <Property Name="description" Type="Edm.String" MaxLength="40" sap:label="Korte tekst" sap:quickinfo="Korte tekst routing"/>
+                <Property Name="status" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Status"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_TemplateitemsType" sap:label="Consumption CDS template items" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_counter"/>
+                    <PropertyRef Name="p_routingCode"/>
+                    <PropertyRef Name="routingType"/>
+                    <PropertyRef Name="routingCode"/>
+                </Key>
+                <Property Name="p_counter" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Routinggroepteller"/>
+                <Property Name="p_routingCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:label="Routinggroep"/>
+                <Property Name="routingType" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Routingtype"/>
+                <Property Name="machineUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="laborUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="setupTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="setupUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="machineTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="machineUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="laborTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="laborUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="setupActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="machineActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="laborActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="changeNumber" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Wijzigingsnummer"/>
+                <Property Name="object" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="routingCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:label="Routinggroep" sap:quickinfo="Code van routinggroep"/>
+                <Property Name="costSort" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Kostensoort"/>
+                <Property Name="buyerGroup" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Inkoopgroep" sap:quickinfo="Inkoopgroep van uitbestede prestatie"/>
+                <Property Name="materialGroup" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Goederengroep"/>
+                <Property Name="operationNumber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Operatie" sap:quickinfo="Operatienummer"/>
+                <Property Name="workplace" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Werkplek"/>
+                <Property Name="controlKey" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="description" Type="Edm.String" MaxLength="40" sap:label="Omschr. operatie" sap:quickinfo="Omschrijving operatie"/>
+                <Property Name="baseQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Basishoeveelheid"/>
+                <Property Name="baseUnit" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Teller" sap:quickinfo="Teller voor omrekening plan- en operatiehoeveelheidseenheid"/>
+                <Property Name="setupUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <NavigationProperty Name="Parameters" Relationship="ZROUTING_CREATOR_SRV.assoc_19F531A604833C1F5DB5F8C27B981E11" FromRole="ToRole_assoc_19F531A604833C1F5DB5F8C27B981E11" ToRole="FromRole_assoc_19F531A604833C1F5DB5F8C27B981E11" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_TemplateitemsParameters" sap:semantics="parameters" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_counter"/>
+                    <PropertyRef Name="p_routingCode"/>
+                </Key>
+                <Property Name="p_counter" Type="Edm.String" Nullable="false" MaxLength="2" sap:parameter="mandatory" sap:label="Routinggroepteller" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="p_routingCode" Type="Edm.String" Nullable="false" MaxLength="8" sap:parameter="mandatory" sap:label="Routinggroep" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Set" Relationship="ZROUTING_CREATOR_SRV.assoc_19F531A604833C1F5DB5F8C27B981E11" FromRole="FromRole_assoc_19F531A604833C1F5DB5F8C27B981E11" ToRole="ToRole_assoc_19F531A604833C1F5DB5F8C27B981E11"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_WorkcenterType" sap:label="Consumption CDS workcenter" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_plant"/>
+                    <PropertyRef Name="objecttype"/>
+                    <PropertyRef Name="objectID"/>
+                </Key>
+                <Property Name="p_plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Vestiging"/>
+                <Property Name="objecttype" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype" sap:quickinfo="Objecttype CIM-resource"/>
+                <Property Name="machineUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="unit-of-measure"/>
+                <Property Name="laborUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="unit-of-measure"/>
+                <Property Name="categorynumber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Werkpleksoort"/>
+                <Property Name="description" Type="Edm.String" MaxLength="40" sap:label="Omschrijving" sap:quickinfo="Korte omschrijving"/>
+                <Property Name="objectID" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID" sap:quickinfo="Object-ID productiemiddel"/>
+                <Property Name="plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Vestiging"/>
+                <Property Name="language" Type="Edm.String" MaxLength="2" sap:label="Taalcode"/>
+                <Property Name="begindate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Begindatum"/>
+                <Property Name="controlKey" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="enddate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Einddatum"/>
+                <Property Name="workplace" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Werkplek"/>
+                <Property Name="setupUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="unit-of-measure"/>
+                <NavigationProperty Name="Parameters" Relationship="ZROUTING_CREATOR_SRV.assoc_631412D13583C5BB121338273D4D9EA7" FromRole="ToRole_assoc_631412D13583C5BB121338273D4D9EA7" ToRole="FromRole_assoc_631412D13583C5BB121338273D4D9EA7" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_WorkcenterParameters" sap:semantics="parameters" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_plant"/>
+                </Key>
+                <Property Name="p_plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:parameter="mandatory" sap:label="Vestiging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Set" Relationship="ZROUTING_CREATOR_SRV.assoc_631412D13583C5BB121338273D4D9EA7" FromRole="FromRole_assoc_631412D13583C5BB121338273D4D9EA7" ToRole="ToRole_assoc_631412D13583C5BB121338273D4D9EA7"/>
+            </EntityType>
+            <Association Name="assoc_06B750711F8DF69595B950B801110F04" sap:content-version="1">
+                <End Type="ZROUTING_CREATOR_SRV.Zppc_Cds_RoutingParameters" Multiplicity="1" Role="FromRole_assoc_06B750711F8DF69595B950B801110F04"/>
+                <End Type="ZROUTING_CREATOR_SRV.Zppc_Cds_RoutingType" Multiplicity="*" Role="ToRole_assoc_06B750711F8DF69595B950B801110F04"/>
+            </Association>
+            <Association Name="assoc_631412D13583C5BB121338273D4D9EA7" sap:content-version="1">
+                <End Type="ZROUTING_CREATOR_SRV.Zppc_Cds_WorkcenterParameters" Multiplicity="1" Role="FromRole_assoc_631412D13583C5BB121338273D4D9EA7"/>
+                <End Type="ZROUTING_CREATOR_SRV.Zppc_Cds_WorkcenterType" Multiplicity="*" Role="ToRole_assoc_631412D13583C5BB121338273D4D9EA7"/>
+            </Association>
+            <Association Name="assoc_19F531A604833C1F5DB5F8C27B981E11" sap:content-version="1">
+                <End Type="ZROUTING_CREATOR_SRV.Zppc_Cds_TemplateitemsParameters" Multiplicity="1" Role="FromRole_assoc_19F531A604833C1F5DB5F8C27B981E11"/>
+                <End Type="ZROUTING_CREATOR_SRV.Zppc_Cds_TemplateitemsType" Multiplicity="*" Role="ToRole_assoc_19F531A604833C1F5DB5F8C27B981E11"/>
+            </Association>
+            <EntityContainer Name="ZROUTING_CREATOR_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Zppc_Cds_RoutingSet" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_RoutingType" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_Routing" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_RoutingParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_Template" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_TemplateType" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_TemplateitemsSet" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_TemplateitemsType" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_Templateitems" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_TemplateitemsParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_WorkcenterSet" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_WorkcenterType" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_Workcenter" EntityType="ZROUTING_CREATOR_SRV.Zppc_Cds_WorkcenterParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_19F531A604833C1F5DB5F8C27B981E11" Association="ZROUTING_CREATOR_SRV.assoc_19F531A604833C1F5DB5F8C27B981E11" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_Templateitems" Role="FromRole_assoc_19F531A604833C1F5DB5F8C27B981E11"/>
+                    <End EntitySet="Zppc_Cds_TemplateitemsSet" Role="ToRole_assoc_19F531A604833C1F5DB5F8C27B981E11"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_06B750711F8DF69595B950B801110F04" Association="ZROUTING_CREATOR_SRV.assoc_06B750711F8DF69595B950B801110F04" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_Routing" Role="FromRole_assoc_06B750711F8DF69595B950B801110F04"/>
+                    <End EntitySet="Zppc_Cds_RoutingSet" Role="ToRole_assoc_06B750711F8DF69595B950B801110F04"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_631412D13583C5BB121338273D4D9EA7" Association="ZROUTING_CREATOR_SRV.assoc_631412D13583C5BB121338273D4D9EA7" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_Workcenter" Role="FromRole_assoc_631412D13583C5BB121338273D4D9EA7"/>
+                    <End EntitySet="Zppc_Cds_WorkcenterSet" Role="ToRole_assoc_631412D13583C5BB121338273D4D9EA7"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZROUTING_CREATOR_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZROUTING_CREATOR_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

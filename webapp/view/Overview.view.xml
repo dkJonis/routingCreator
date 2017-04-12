@@ -1,31 +1,27 @@
-<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
-	xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m" controllerName="PP_Cloostermans_routing.controller.Overview" displayBlock="true">
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m" controllerName="com.flexso.routingbuilder.controller.Overview" displayBlock="true">
 	<App autoFocus="false">
 		<pages>
-			<Page title="{i18n>title}" id="overviewPage">
+			<Page title="{i18n>title}" id="overviewPage" backgroundDesign="Transparent">
 				<content>
-					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="__header1"
-						backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true"/>
+					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="__header1" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true"/>
 					<HBox fitContainer="true" displayInline="true">
-						<VBox>
+						<VBox id="leftBox">
 							<Button id="addWorkcenter" text="add workcenter" press="addItemToTable" type="default"/>
 							<ScrollContainer vertical="true" height="85%" width="100%" headerText="Workcenters">
-								<List items="{list>/}" id="WorkcenterList" growingThreshold="10" headerText="Workcenters" includeItemInSelection="true"
-									mode="SingleSelectMaster" keyboardMode="Edit">
+								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" headerText="Workcenters" includeItemInSelection="true" mode="SingleSelectMaster" keyboardMode="Edit" backgroundDesign="Transparent">
 									<!--<headerToolbar> items="{list>/}"
 								<Toolbar>
 									<Title text="Workcenters" level="H4"/>
 								</Toolbar>
 							</headerToolbar>-->
 									<items id="workcenters">
-										<StandardListItem title="{list>workplace}" description="{list>description}" info="{list>plant}"/>
+										<StandardListItem title="{workcenter>workplace}" description="{workcenter>description}" info="{workcenter>plant}"/>
 									</items>
 								</List>
 							</ScrollContainer>
 						</VBox>
 						<VBox direction="Column" displayInline="true">
-							<Table noDataText="Drop workcenters here or add a template" id="routingTable" headerText="Operations" items="{routingTable>/}"
-								includeItemInSelection="true" mode="SingleSelectMaster">
+							<Table noDataText="Drop workcenters here or add a template" id="routingTable" headerText="Operations" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster">
 								<columns>
 									<Column id="cOperation">
 										<header>
@@ -66,40 +62,43 @@
 								<items id="RoutingRecords">
 									<ColumnListItem id="Routings">
 										<cells>
-											<Text text="{routingTable>operationNumber}" id="Operation"/>
+											<Text text="{routing>operationNumber}" id="Operation"/>
 										</cells>
 										<cells>
-											<Text text="{routingTable>workcenter}" id="workcenter"/>
+											<Text text="{routing>workcenter}" id="workcenter"/>
 										</cells>
 										<cells>
-											<Text text="{routingTable>controlKey}" id="controlKey"/>
+											<Text text="{routing>controlKey}" id="controlKey"/>
 										</cells>
 										<cells>
-											<TextArea value="{routingTable>operationDescription}" id="description"/>
+											<TextArea value="{routing>operationDescription}" id="description"/>
 										</cells>
 										<cells>
-											<Input value="{routingTable>setupTime}" id="setup" placeholder="..." description="{routingTable>setupUnit}" />
+											<Input value="{routing>setupTime}" id="setup" placeholder="..." description="{routing>setupUnit}"/>
 										</cells>
 										<cells>
-											<Input value="{routingTable>machineTime}" id="machine" placeholder="..." description="{routingTable>machineUnit}" />
+											<Input value="{routing>machineTime}" id="machine" placeholder="..." description="{routing>machineUnit}"/>
 										</cells>
 										<cells>
-											<Input value="{routingTable>laborTime}" id="labor" placeholder="..." description="{routingTable>laborUnit}" />
+											<Input value="{routing>laborTime}" id="labor" placeholder="..." description="{routing>laborUnit}"/>
 										</cells>
 									</ColumnListItem>
 								</items>
 								<infoToolbar>
 									<Toolbar width="100%" id="__toolbar2" design="Solid">
 										<content>
-											<ToolbarSpacer id="__spacer0"/><Button ariaLabelledBy="__xmlview0--lblDescription" id="btnEditSingleRecord" press="ActivateEditMode" icon="sap-icon://edit"/><Button id="__button0" color="white" icon="sap-icon://delete"/>
+											<ToolbarSpacer id="__spacer0"/><Button id="btnDeleteRow" color="white" icon="sap-icon://delete" press="DeleteSelectedRecord"/>
 										</content>
 									</Toolbar>
 								</infoToolbar>
+							<customData>
+							    <core:CustomData key="w5g.dt.editable" value="true" id="__data20"/>
+							</customData>
 							</Table>
 							<CheckBox name="checkOverwrite" text="Overwrite existing operations"/>
 							<Button id="AddTemplate" text="Add to routings" press="onAddToRoutings" type="default"/>
-							<ComboBox id="comboTemplate" placeholder="Choose a template..." items="{comboTemplate>/}">
-								<core:ListItem key="{comboTemplate>routingGroupCode}" text="{comboTemplate>routingGroupCounter} {comboTemplate&gt;description}"/>
+							<ComboBox id="comboTemplate" placeholder="Choose a template..." items="{template>/}">
+								<core:ListItem key="{template>routingGroupCode}" text="{template>routingGroupCounter} {template&gt;description}"/>
 							</ComboBox>
 						</VBox>
 					</HBox>
