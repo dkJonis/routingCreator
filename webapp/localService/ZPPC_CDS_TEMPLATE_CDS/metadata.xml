@@ -1,0 +1,43 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPPC_CDS_TEMPLATE_CDS" xml:lang="nl" sap:schema-version="1">
+            <EntityType Name="Zppc_Cds_TemplateType" sap:label="Consumption CDS templates" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="plnnr"/>
+                    <PropertyRef Name="plnal"/>
+                    <PropertyRef Name="plnty"/>
+                    <PropertyRef Name="zaehl"/>
+                </Key>
+                <Property Name="plnnr" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:label="Routinggroep" sap:quickinfo="Code van routinggroep"/>
+                <Property Name="plnal" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Routinggroepteller"/>
+                <Property Name="plnty" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Routingtype"/>
+                <Property Name="zaehl" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Teller" sap:quickinfo="Interne teller"/>
+                <Property Name="ktext" Type="Edm.String" MaxLength="40" sap:label="Korte tekst" sap:quickinfo="Korte tekst routing"/>
+                <Property Name="statu" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Status"/>
+            </EntityType>
+            <EntityContainer Name="ZPPC_CDS_TEMPLATE_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Zppc_Cds_Template" EntityType="ZPPC_CDS_TEMPLATE_CDS.Zppc_Cds_TemplateType" sap:searchable="true" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZPPC_CDS_TEMPLATE_CDS.Zppc_Cds_TemplateType">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>plnnr</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPPC_CDS_TEMPLATE_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPPC_CDS_TEMPLATE_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

@@ -1,0 +1,68 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPPC_CDS_WORKCENTER_CDS" xml:lang="nl" sap:schema-version="1">
+            <EntityType Name="Zppc_Cds_WorkcenterType" sap:label="Consumption CDS workcenter" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Objecttype"/>
+                    <PropertyRef Name="ObjectID"/>
+                </Key>
+                <Property Name="Objecttype" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype" sap:quickinfo="Objecttype CIM-resource"/>
+                <Property Name="ObjectID" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID" sap:quickinfo="Object-ID productiemiddel"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" sap:label="Taalcode"/>
+                <Property Name="Begindate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Begindatum"/>
+                <Property Name="Enddate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Einddatum"/>
+                <Property Name="Workplace" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Werkplek"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Vestiging"/>
+                <Property Name="Categorynumber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Werkpleksoort"/>
+                <Property Name="Description" Type="Edm.String" MaxLength="40" sap:label="Omschrijving" sap:quickinfo="Korte omschrijving"/>
+                <NavigationProperty Name="to_desc" Relationship="ZPPC_CDS_WORKCENTER_CDS.assoc_0D20CF45FC24E92FD17837BF31C589DF" FromRole="FromRole_assoc_0D20CF45FC24E92FD17837BF31C589DF" ToRole="ToRole_assoc_0D20CF45FC24E92FD17837BF31C589DF"/>
+            </EntityType>
+            <EntityType Name="CRTXType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="OBJTY"/>
+                    <PropertyRef Name="OBJID"/>
+                    <PropertyRef Name="SPRAS"/>
+                </Key>
+                <Property Name="OBJTY" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype"/>
+                <Property Name="OBJID" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="SPRAS" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Taalcode"/>
+                <Property Name="AEDAT_TEXT" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Wijzigingsdatum"/>
+                <Property Name="AENAM_TEXT" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gebruikersnaam"/>
+                <Property Name="KTEXT" Type="Edm.String" MaxLength="40" sap:label="Omschrijving"/>
+                <Property Name="KTEXT_UP" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Omschr."/>
+            </EntityType>
+            <Association Name="assoc_0D20CF45FC24E92FD17837BF31C589DF" sap:content-version="1">
+                <End Type="ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType" Multiplicity="1" Role="FromRole_assoc_0D20CF45FC24E92FD17837BF31C589DF"/>
+                <End Type="ZPPC_CDS_WORKCENTER_CDS.CRTXType" Multiplicity="*" Role="ToRole_assoc_0D20CF45FC24E92FD17837BF31C589DF"/>
+            </Association>
+            <EntityContainer Name="ZPPC_CDS_WORKCENTER_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Zppc_Cds_Workcenter" EntityType="ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType" sap:searchable="true" sap:content-version="1"/>
+                <EntitySet Name="CRTX" EntityType="ZPPC_CDS_WORKCENTER_CDS.CRTXType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_0D20CF45FC24E92FD17837BF31C589DF" Association="ZPPC_CDS_WORKCENTER_CDS.assoc_0D20CF45FC24E92FD17837BF31C589DF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_Workcenter" Role="FromRole_assoc_0D20CF45FC24E92FD17837BF31C589DF"/>
+                    <End EntitySet="CRTX" Role="ToRole_assoc_0D20CF45FC24E92FD17837BF31C589DF"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>ObjectID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPPC_CDS_WORKCENTER_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPPC_CDS_WORKCENTER_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

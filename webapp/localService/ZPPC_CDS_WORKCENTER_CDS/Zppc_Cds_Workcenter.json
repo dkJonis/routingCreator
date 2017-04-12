@@ -1,0 +1,191 @@
+[{
+	"Objecttype": "Objecttype 1",
+	"ObjectID": "ObjectID 1",
+	"Language": "Language 1",
+	"Begindate": "/Date(1382446930000)/",
+	"Enddate": "/Date(1116507730000)/",
+	"Workplace": "Workplace 1",
+	"Plant": "1710",
+	"Categorynumber": "Categorynumber 1",
+	"Description": "Description 1",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%201',ObjectID='ObjectID%201')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%201',ObjectID='ObjectID%201')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 2",
+	"ObjectID": "ObjectID 2",
+	"Language": "Language 2",
+	"Begindate": "/Date(1273150930000)/",
+	"Enddate": "/Date(1147179730000)/",
+	"Workplace": "Workplace 2",
+	"Plant": "1710",
+	"Categorynumber": "Categorynumber 2",
+	"Description": "Description 2",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%202',ObjectID='ObjectID%202')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%202',ObjectID='ObjectID%202')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 3",
+	"ObjectID": "ObjectID 3",
+	"Language": "Language 3",
+	"Begindate": "/Date(1065272530000)/",
+	"Enddate": "/Date(993387730000)/",
+	"Workplace": "Workplace 3",
+	"Plant": "1010",
+	"Categorynumber": "Categorynumber 3",
+	"Description": "Description 3",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%203',ObjectID='ObjectID%203')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%203',ObjectID='ObjectID%203')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 4",
+	"ObjectID": "ObjectID 4",
+	"Language": "Language 4",
+	"Begindate": "/Date(1109858530000)/",
+	"Enddate": "/Date(1045836130000)/",
+	"Workplace": "Workplace 4",
+	"Plant": "1710",
+	"Categorynumber": "Categorynumber 4",
+	"Description": "Description 4",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%204',ObjectID='ObjectID%204')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%204',ObjectID='ObjectID%204')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 5",
+	"ObjectID": "ObjectID 5",
+	"Language": "Language 5",
+	"Begindate": "/Date(1098277330000)/",
+	"Enddate": "/Date(1364047330000)/",
+	"Workplace": "Workplace 5",
+	"Plant": "Plant 5",
+	"Categorynumber": "Categorynumber 5",
+	"Description": "Description 5",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%205',ObjectID='ObjectID%205')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%205',ObjectID='ObjectID%205')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 6",
+	"ObjectID": "ObjectID 6",
+	"Language": "Language 6",
+	"Begindate": "/Date(1466427730000)/",
+	"Enddate": "/Date(1075903330000)/",
+	"Workplace": "Workplace 6",
+	"Plant": "Plant 6",
+	"Categorynumber": "Categorynumber 6",
+	"Description": "Description 6",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%206',ObjectID='ObjectID%206')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%206',ObjectID='ObjectID%206')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 7",
+	"ObjectID": "ObjectID 7",
+	"Language": "Language 7",
+	"Begindate": "/Date(1219928530000)/",
+	"Enddate": "/Date(1028725330000)/",
+	"Workplace": "Workplace 7",
+	"Plant": "Plant 7",
+	"Categorynumber": "Categorynumber 7",
+	"Description": "Description 7",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%207',ObjectID='ObjectID%207')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%207',ObjectID='ObjectID%207')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 8",
+	"ObjectID": "ObjectID 8",
+	"Language": "Language 8",
+	"Begindate": "/Date(1389103330000)/",
+	"Enddate": "/Date(1297432930000)/",
+	"Workplace": "Workplace 8",
+	"Plant": "Plant 8",
+	"Categorynumber": "Categorynumber 8",
+	"Description": "Description 8",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%208',ObjectID='ObjectID%208')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%208',ObjectID='ObjectID%208')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 9",
+	"ObjectID": "ObjectID 9",
+	"Language": "Language 9",
+	"Begindate": "/Date(1465304530000)/",
+	"Enddate": "/Date(1161349330000)/",
+	"Workplace": "Workplace 9",
+	"Plant": "Plant 9",
+	"Categorynumber": "Categorynumber 9",
+	"Description": "Description 9",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%209',ObjectID='ObjectID%209')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%209',ObjectID='ObjectID%209')/to_desc"
+		}
+	}
+}, {
+	"Objecttype": "Objecttype 10",
+	"ObjectID": "ObjectID 10",
+	"Language": "Language 10",
+	"Begindate": "/Date(1004187730000)/",
+	"Enddate": "/Date(1457100130000)/",
+	"Workplace": "Workplace 10",
+	"Plant": "Plant 10",
+	"Categorynumber": "Categorynumber 10",
+	"Description": "Description 10",
+	"__metadata": {
+		"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%2010',ObjectID='ObjectID%2010')",
+		"type": "ZPPC_CDS_WORKCENTER_CDS.Zppc_Cds_WorkcenterType"
+	},
+	"to_desc": {
+		"__deferred": {
+			"uri": "Zppc_Cds_Workcenter(Objecttype='Objecttype%2010',ObjectID='ObjectID%2010')/to_desc"
+		}
+	}
+}]

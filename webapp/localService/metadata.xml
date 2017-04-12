@@ -1,0 +1,481 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPPC_CDS_ROUTING_CDS" xml:lang="nl" sap:schema-version="1">
+            <EntityType Name="Zppc_Cds_RoutingType" sap:label="Consumption CDS routing" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="materialnr"/>
+                    <PropertyRef Name="p_plant"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="materialnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Artikel"/>
+                <Property Name="p_plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Vestiging"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Artikel" sap:quickinfo="Artikelnummer"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gecreëerd op" sap:quickinfo="Aanmaakdatum record"/>
+                <Property Name="CreatedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gecreëerd door" sap:quickinfo="Medewerker die het record heeft gecreëerd"/>
+                <Property Name="LastChange" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gewijzigd op" sap:quickinfo="Datum van laatste wijziging"/>
+                <Property Name="LastChangedBy" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gewijzigd door" sap:quickinfo="Naam van medewerker die het object heeft gewijzigd"/>
+                <Property Name="operationNumber" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Operatie" sap:quickinfo="Operatienummer"/>
+                <Property Name="routingNumber" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Routingknooppunt" sap:quickinfo="Nummer van routingknooppunt"/>
+                <Property Name="controlKey" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="operationDescription" Type="Edm.String" MaxLength="40" sap:label="Omschr. operatie" sap:quickinfo="Omschrijving operatie"/>
+                <Property Name="baseQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Basishoeveelheid"/>
+                <Property Name="baseUnit" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Teller" sap:quickinfo="Teller voor omrekening plan- en operatiehoeveelheidseenheid"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Vestiging"/>
+                <Property Name="setupUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="machineUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="laborUnit" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:quickinfo="Maateenheid van standaardwaarde" sap:semantics="currency-code"/>
+                <Property Name="setupTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="setupUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="machineTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="machineUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="laborTime" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="laborUnit" sap:label="Standaard" sap:quickinfo="Standaardwaarde"/>
+                <Property Name="setupActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="machineActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="laborActivity" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="arbid" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="RoutingType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Routingtype"/>
+                <Property Name="RoutingGroupCode" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Routinggroep" sap:quickinfo="Code van routinggroep"/>
+                <Property Name="RoutingGroupCounter" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Routinggroepteller"/>
+                <Property Name="ExtraCounter" Type="Edm.String" MaxLength="7" sap:display-format="NonNegative" sap:label="ExtraCrit.teller" sap:quickinfo="Teller extra criteria"/>
+                <Property Name="InternalCounter" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Teller" sap:quickinfo="Interne teller"/>
+                <Property Name="ValidDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Geldig van" sap:quickinfo="Datum geldig van"/>
+                <Property Name="ChangeNumber" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Wijzigingsnummer"/>
+                <NavigationProperty Name="to_routingOperation" Relationship="ZPPC_CDS_ROUTING_CDS.assoc_34CBE9BD39AF141E59BE0F2D878FDC5F" FromRole="FromRole_assoc_34CBE9BD39AF141E59BE0F2D878FDC5F" ToRole="ToRole_assoc_34CBE9BD39AF141E59BE0F2D878FDC5F"/>
+                <NavigationProperty Name="to_workcenter" Relationship="ZPPC_CDS_ROUTING_CDS.assoc_6EC0CA84046520C1059B9363C1B5E379" FromRole="FromRole_assoc_6EC0CA84046520C1059B9363C1B5E379" ToRole="ToRole_assoc_6EC0CA84046520C1059B9363C1B5E379"/>
+                <NavigationProperty Name="Parameters" Relationship="ZPPC_CDS_ROUTING_CDS.assoc_06B750711F8DF69595B950B801110F04" FromRole="ToRole_assoc_06B750711F8DF69595B950B801110F04" ToRole="FromRole_assoc_06B750711F8DF69595B950B801110F04" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="Zppc_Cds_RoutingParameters" sap:semantics="parameters" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="materialnr"/>
+                    <PropertyRef Name="p_plant"/>
+                </Key>
+                <Property Name="materialnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:parameter="mandatory" sap:label="Artikel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="p_plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:parameter="mandatory" sap:label="Vestiging" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Set" Relationship="ZPPC_CDS_ROUTING_CDS.assoc_06B750711F8DF69595B950B801110F04" FromRole="FromRole_assoc_06B750711F8DF69595B950B801110F04" ToRole="ToRole_assoc_06B750711F8DF69595B950B801110F04"/>
+            </EntityType>
+            <EntityType Name="PLPOType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="PLNTY"/>
+                    <PropertyRef Name="PLNNR"/>
+                    <PropertyRef Name="PLNKN"/>
+                    <PropertyRef Name="ZAEHL"/>
+                </Key>
+                <Property Name="ZEIMU" Type="Edm.String" MaxLength="3" sap:label="Min.overlapp.tijd" sap:semantics="unit-of-measure"/>
+                <Property Name="ZMINU" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIMU" sap:label="Min.overlapp.tijd"/>
+                <Property Name="MINWE" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MEINH" sap:label="Min.doorgifte hoevh"/>
+                <Property Name="SPMUS" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Verplichte splitsing"/>
+                <Property Name="SPLIM" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Aantal splitsingen"/>
+                <Property Name="ZEIMB" Type="Edm.String" MaxLength="3" sap:label="Min.bewerkingstijd" sap:semantics="unit-of-measure"/>
+                <Property Name="ZMINB" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIMB" sap:label="Min.bewerkingstijd"/>
+                <Property Name="ZEILM" Type="Edm.String" MaxLength="3" sap:label="Eh. max. verbl.td" sap:semantics="unit-of-measure"/>
+                <Property Name="ZLMAX" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEILM" sap:label="Max. verblijftijd"/>
+                <Property Name="ZEILP" Type="Edm.String" MaxLength="3" sap:label="Eh. proc.geb. verbl." sap:semantics="unit-of-measure"/>
+                <Property Name="ZLPRO" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEILP" sap:label="ProcGebVerblijfTd"/>
+                <Property Name="ZEIWN" Type="Edm.String" MaxLength="3" sap:label="Norm.wachttijdeenh." sap:semantics="unit-of-measure"/>
+                <Property Name="ZWNOR" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIWN" sap:label="Norm.wachttijd"/>
+                <Property Name="ZEIWM" Type="Edm.String" MaxLength="3" sap:label="Min.wachttijdeenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="ZWMIN" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIWM" sap:label="Min. wachttijd"/>
+                <Property Name="ZEITN" Type="Edm.String" MaxLength="3" sap:label="Eh. norm. transp.td" sap:semantics="unit-of-measure"/>
+                <Property Name="ZTNOR" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEITN" sap:label="Norm. transporttijd"/>
+                <Property Name="ZEITM" Type="Edm.String" MaxLength="3" sap:label="Eh. minim.transp.td" sap:semantics="unit-of-measure"/>
+                <Property Name="ZTMIN" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEITM" sap:label="Min. transporttijd"/>
+                <Property Name="ABLIPKZ" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Afbreken/wacht.par."/>
+                <Property Name="RSTRA" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Reductiestrategie"/>
+                <Property Name="BZOFFB" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Referentie start"/>
+                <Property Name="OFFSTB" Type="Edm.Decimal" Precision="5" Scale="0" sap:unit="EHOFFB" sap:label="Tijdsafstand start"/>
+                <Property Name="EHOFFB" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="BZOFFE" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Referentie einde"/>
+                <Property Name="OFFSTE" Type="Edm.Decimal" Precision="5" Scale="0" sap:unit="EHOFFE" sap:label="Tijdsafstand einde"/>
+                <Property Name="EHOFFE" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="SORTL" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Sorteerbegrip"/>
+                <Property Name="LIFNR" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Crediteur"/>
+                <Property Name="PLIFZ" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Geplande levertijd"/>
+                <Property Name="PREIS" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="WAERS" sap:label="Nettoprijs"/>
+                <Property Name="PEINH" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Prijseenheid"/>
+                <Property Name="SAKTO" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Kostensoort"/>
+                <Property Name="WAERS" Type="Edm.String" MaxLength="5" sap:label="Valuta" sap:semantics="currency-code"/>
+                <Property Name="INFNR" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Inkoopinforecord"/>
+                <Property Name="ESOKZ" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Inforecordtype"/>
+                <Property Name="EKORG" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Inkooporganisatie"/>
+                <Property Name="EKGRP" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Inkoopgroep"/>
+                <Property Name="KZLGF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Serieonafh. ext.bew."/>
+                <Property Name="MATKL" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Goederengroep"/>
+                <Property Name="DAUNO" Type="Edm.Decimal" Precision="5" Scale="1" sap:unit="DAUNE" sap:label="Normale duur"/>
+                <Property Name="DAUNE" Type="Edm.String" MaxLength="3" sap:label="Eenheid duur normaal" sap:semantics="unit-of-measure"/>
+                <Property Name="DAUMI" Type="Edm.Decimal" Precision="5" Scale="1" sap:unit="DAUME" sap:label="Duur minimaal"/>
+                <Property Name="DAUME" Type="Edm.String" MaxLength="3" sap:label="Eenheid duur min." sap:semantics="unit-of-measure"/>
+                <Property Name="DDEHN" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Duur flexibel"/>
+                <Property Name="EINSA" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Inperking begin"/>
+                <Property Name="EINSE" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Inperking einde"/>
+                <Property Name="ARBEI" Type="Edm.Decimal" Precision="7" Scale="1" sap:unit="ARBEH" sap:label="Werk"/>
+                <Property Name="ARBEH" Type="Edm.String" MaxLength="3" sap:label="Eenheid werk" sap:semantics="unit-of-measure"/>
+                <Property Name="ANZZL" Type="Edm.Byte" sap:label="Aantal"/>
+                <Property Name="PRZNT" Type="Edm.Byte" sap:label="Procent"/>
+                <Property Name="VERTL" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Verdelingsfunctie"/>
+                <Property Name="MLSTN" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Mijlpaalgebruik"/>
+                <Property Name="PPRIO" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Prioriteit"/>
+                <Property Name="BUKRS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Bedrijfsnummer"/>
+                <Property Name="SLWID" Type="Edm.String" MaxLength="7" sap:display-format="UpperCase" sap:label="Veldkey"/>
+                <Property Name="USR00" Type="Edm.String" MaxLength="20" sap:label="Gebr.veld 20 tk."/>
+                <Property Name="USR01" Type="Edm.String" MaxLength="20" sap:label="Gebr.veld 20 tk."/>
+                <Property Name="USR02" Type="Edm.String" MaxLength="10" sap:label="Gebruikersveld"/>
+                <Property Name="USR03" Type="Edm.String" MaxLength="10" sap:label="Gebruikersveld"/>
+                <Property Name="USR04" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="USE04" sap:label="Gebr.veld hoevh."/>
+                <Property Name="USE04" Type="Edm.String" MaxLength="3" sap:label="Gebr.veld eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="USR05" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="USE05" sap:label="Gebr.veld hoevh."/>
+                <Property Name="USE05" Type="Edm.String" MaxLength="3" sap:label="Gebr.veld eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="USR06" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="USE06" sap:label="Gebr.veld waarde"/>
+                <Property Name="USE06" Type="Edm.String" MaxLength="5" sap:label="Gebr.veld eenheid" sap:semantics="currency-code"/>
+                <Property Name="USR07" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="USE07" sap:label="Gebr.veld waarde"/>
+                <Property Name="USE07" Type="Edm.String" MaxLength="5" sap:label="Gebr.veld eenheid" sap:semantics="currency-code"/>
+                <Property Name="USR08" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gebr.veld datum"/>
+                <Property Name="USR09" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gebr.veld datum"/>
+                <Property Name="USR10" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Teken gebr.veld"/>
+                <Property Name="USR11" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Teken gebr.veld"/>
+                <Property Name="ANFKO" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Aanvrag.kostenplaats"/>
+                <Property Name="ANFKOKRS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Controllinggebied"/>
+                <Property Name="KAPAR" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Capaciteitssoort"/>
+                <Property Name="INDET" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Berekeningscode"/>
+                <Property Name="LARNT" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="PRKST" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="WAERS" sap:label="Bedrag"/>
+                <Property Name="QRASTERMNG" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="Rasterhoeveelheid"/>
+                <Property Name="QRASTEREH" Type="Edm.String" MaxLength="3" sap:label="Rasterhoeveelh.eenh." sap:semantics="unit-of-measure"/>
+                <Property Name="ANLZU" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Toestand techn.syst."/>
+                <Property Name="ISTRU" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Bouwgroep"/>
+                <Property Name="ISTTY" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Stuklijsttype"/>
+                <Property Name="ISTNR" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Stuklijst"/>
+                <Property Name="ISTKN" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Knooppunt positie"/>
+                <Property Name="ISTPO" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Teller"/>
+                <Property Name="IUPOZ" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Subpositienummer"/>
+                <Property Name="EBORT" Type="Edm.String" MaxLength="20" sap:label="Inbouwplaats"/>
+                <Property Name="KALID" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="ID vestigingskal."/>
+                <Property Name="FRSP" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Vroegst/laatst"/>
+                <Property Name="VERTN" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Verd.sl. int. bew."/>
+                <Property Name="ZGR01" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR02" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR03" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR04" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR05" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR06" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="MDLID" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Model-ID"/>
+                <Property Name="RUZUS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Afronding toeslagen"/>
+                <Property Name="BMEIH" Type="Edm.String" MaxLength="3" sap:label="Bestelhoevh-eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="BMVRG" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="BMEIH" sap:label="Bestelhoeveelheid"/>
+                <Property Name="CKSELKZ" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Calc.relev."/>
+                <Property Name="KALKZ" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Calculeren"/>
+                <Property Name="NPRIO" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Prioriteit"/>
+                <Property Name="PVZKN" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Routingknooppunt"/>
+                <Property Name="PHFLG" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Teken fase"/>
+                <Property Name="PHSEQ" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Bestemming best.rec."/>
+                <Property Name="KNOBJ" Type="Edm.String" MaxLength="18" sap:display-format="NonNegative" sap:label="Toewijzingsnummer"/>
+                <Property Name="ERFSICHT" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Invoerview"/>
+                <Property Name="PSPNR" Type="Edm.String" MaxLength="24" sap:display-format="NonNegative" sap:label="Std.-WBS-element"/>
+                <Property Name="QLOTYPE" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype"/>
+                <Property Name="QLOBJEKTID" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="QLKAPAR" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Capaciteitssoort"/>
+                <Property Name="QKZPRZEIT" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Tijdreferentie"/>
+                <Property Name="QKZZTMG1" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Hvh-terugm.deelpart."/>
+                <Property Name="QKZPRMENG" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Hoeveelheidsrelatie"/>
+                <Property Name="QKZPRFREI" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Vrij"/>
+                <Property Name="QRASTZEHT" Type="Edm.String" MaxLength="3" sap:label="Tijdseenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="QRASTZFAK" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="Tijdfactor"/>
+                <Property Name="QRASTMENG" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="QRASTEREH" sap:label="Hoevh.interval"/>
+                <Property Name="QPPKTABS" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Controlepuntafsluit."/>
+                <Property Name="KRIT1" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Planningsobject"/>
+                <Property Name="CLASSID" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Intern klassennummer"/>
+                <Property Name="PACKNO" Type="Edm.String" MaxLength="10" sap:display-format="NonNegative" sap:label="Pakketnummer"/>
+                <Property Name="EBELN" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Inkoopdocument"/>
+                <Property Name="EBELP" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative" sap:label="Positie"/>
+                <Property Name="CAPOC" Type="Edm.String" MaxLength="1" sap:display-format="NonNegative" sap:label="CAP prod.order"/>
+                <Property Name="FLG_CAPTXT" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="CAP-tekst aanwezig"/>
+                <Property Name="CN_WEIGHT" Type="Edm.Decimal" Precision="8" Scale="0" sap:label="GP-gewicht"/>
+                <Property Name="QKZTLSBEST" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Laatste DP-toewijz."/>
+                <Property Name="AUFKT" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Uitvoeringsfactor"/>
+                <Property Name="DAFKT" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="Gem. uitvoer.fact."/>
+                <Property Name="RWFAK" Type="Edm.Decimal" Precision="5" Scale="3" sap:label="Niet gebruikt"/>
+                <Property Name="AAUFG" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Standaardtaak"/>
+                <Property Name="VERDART" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Aggregatiesoort"/>
+                <Property Name="UAVO_AUFL" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Zonder suboperatie"/>
+                <Property Name="FRDLB" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Loonbewerking"/>
+                <Property Name="QPART" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Controlesoort"/>
+                <Property Name="PRZ01" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Bedrijfsproces"/>
+                <Property Name="TAKT" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Cyclus"/>
+                <Property Name="OPRID" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Identific. operatie"/>
+                <Property Name="NVADD" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Geen waardetoevoeg."/>
+                <Property Name="EVGEW" Type="Edm.Decimal" Precision="8" Scale="0" sap:label="GP-gewicht"/>
+                <Property Name="RFPNT" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Referentieplaats"/>
+                <Property Name="FLG_TSK_GROUP" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Groepsoperatie"/>
+                <Property Name="ADPSP" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Refer.elem. PM/PS"/>
+                <Property Name="VALID_TO" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Geldig tot"/>
+                <Property Name="LOEKZ_INHERITED" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Verwijderteken"/>
+                <Property Name="TPLNR" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Functieplaats"/>
+                <Property Name="EQUNR" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Equipment"/>
+                <Property Name="MES_OPERID" Type="Edm.String" MaxLength="48" sap:display-format="UpperCase" sap:label="MES: operatienummer"/>
+                <Property Name="MES_STEPID" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Stap-ID"/>
+                <Property Name="MANU_PROC" Type="Edm.String" MaxLength="20" sap:display-format="UpperCase" sap:label="Productiemethode"/>
+                <Property Name="xSAPMPxMET_LRCH" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Lengteberek.methode"/>
+                <Property Name="xSAPMPxMAX_FERTL" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MEINH" sap:label="Max.prod.lengte"/>
+                <Property Name="xSAPMPxFIX_AS_J" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MEINH" sap:label="Vaste uitval al lngt"/>
+                <Property Name="xSAPMPxFIX_AS_E" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MEINH" sap:label="Vaste uitval 1e lngt"/>
+                <Property Name="xSAPMPxFIX_AS_L" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MEINH" sap:label="Vaste uitval lt lngt"/>
+                <Property Name="xSAPMPxABL_ZAHL" Type="Edm.String" MaxLength="6" sap:display-format="NonNegative" sap:label="Aantal afrollengtes"/>
+                <Property Name="SUBPLNAL" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="OnderlTaaklGrpTeller"/>
+                <Property Name="SUBPLNNR" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Onderl. taakl.groep"/>
+                <Property Name="SUBPLNTY" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="OnderlTaaklijstType"/>
+                <Property Name="XEXCLTL" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="OndTaaklijst uitsl."/>
+                <Property Name="PLNTY" Type="Edm.String" Nullable="false" MaxLength="1" sap:display-format="UpperCase" sap:label="Routingtype"/>
+                <Property Name="PLNNR" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="UpperCase" sap:label="Routinggroep"/>
+                <Property Name="PLNKN" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Routingknooppunt"/>
+                <Property Name="ZAEHL" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Teller"/>
+                <Property Name="DATUV" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Geldig van"/>
+                <Property Name="TECHV" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Tech. stand van"/>
+                <Property Name="AENNR" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Wijzigingsnummer"/>
+                <Property Name="LOEKZ" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Verwijderteken"/>
+                <Property Name="PARKZ" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Niet-act. wijziging"/>
+                <Property Name="ANDAT" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gecreëerd op"/>
+                <Property Name="ANNAM" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gecreëerd door"/>
+                <Property Name="AEDAT" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Gewijzigd op"/>
+                <Property Name="AENAM" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gewijzigd door"/>
+                <Property Name="SUMNR" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Totalenknoop"/>
+                <Property Name="VORNR" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Operatie"/>
+                <Property Name="STEUS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="ARBID" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="OBJTY" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype"/>
+                <Property Name="WERKS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Vestiging"/>
+                <Property Name="KTSCH" Type="Edm.String" MaxLength="7" sap:display-format="UpperCase" sap:label="Referentiecode"/>
+                <Property Name="LTXA1" Type="Edm.String" MaxLength="40" sap:label="Omschr. operatie"/>
+                <Property Name="LTXA2" Type="Edm.String" MaxLength="40" sap:label="Omschrijving"/>
+                <Property Name="TXTSP" Type="Edm.String" MaxLength="2" sap:label="Taalcode"/>
+                <Property Name="VPLTY" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="TypeGerefRoutng"/>
+                <Property Name="VPLNR" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Geref. routinggroep"/>
+                <Property Name="VPLAL" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Geref. rout.gr.tell."/>
+                <Property Name="VPLFL" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Gerefereerde vlgorde"/>
+                <Property Name="VINTV" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Interval operaties"/>
+                <Property Name="MEINH" Type="Edm.String" MaxLength="3" sap:label="Hoevh.eenheid act." sap:semantics="unit-of-measure"/>
+                <Property Name="UMREN" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Noemer"/>
+                <Property Name="UMREZ" Type="Edm.Decimal" Precision="5" Scale="0" sap:label="Teller"/>
+                <Property Name="BMSCH" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="MEINH" sap:label="Basishoeveelheid"/>
+                <Property Name="ZMERH" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIER" sap:label="Rusttijd"/>
+                <Property Name="ZEIER" Type="Edm.String" MaxLength="3" sap:label="Eenheid van rusttijd" sap:semantics="unit-of-measure"/>
+                <Property Name="LAR01" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="VGE01" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGW01" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="VGE01" sap:label="Standaard"/>
+                <Property Name="LAR02" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="VGE02" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGW02" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="VGE02" sap:label="Standaard"/>
+                <Property Name="LAR03" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="VGE03" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGW03" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="VGE03" sap:label="Standaard"/>
+                <Property Name="LAR04" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="VGE04" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGW04" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="VGE04" sap:label="Standaard"/>
+                <Property Name="LAR05" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="VGE05" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGW05" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="VGE05" sap:label="Standaard"/>
+                <Property Name="LAR06" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Prestatiesoort"/>
+                <Property Name="VGE06" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGW06" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="VGE06" sap:label="Standaard"/>
+                <Property Name="ZERMA" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Std.wrde bepal.soort"/>
+                <Property Name="ZGDAT" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Bepalingsdatum"/>
+                <Property Name="ZCODE" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Ref.nr std.wrde code"/>
+                <Property Name="ZULNR" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Berekeningsbasis"/>
+                <Property Name="RSANZ" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Aant. terugmeldbonn."/>
+                <Property Name="PDEST" Type="Edm.String" MaxLength="30" sap:label="Printer"/>
+                <Property Name="LOANZ" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Aantal urenverantwSt"/>
+                <Property Name="LOART" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Looncomponent"/>
+                <Property Name="QUALF" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Kwalificatiegraad"/>
+                <Property Name="ANZMA" Type="Edm.Decimal" Precision="5" Scale="2" sap:label="Aantal werknemers"/>
+                <Property Name="RFGRP" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Omstelfamiliegroep"/>
+                <Property Name="RFSCH" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Omstelfamiliecode"/>
+                <Property Name="RASCH" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Omstelsoortcode"/>
+                <Property Name="AUFAK" Type="Edm.Decimal" Precision="5" Scale="3" sap:label="Uitval"/>
+                <Property Name="LOGRP" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Salarisschaal"/>
+                <Property Name="UEMUS" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Verpl. overlapping"/>
+                <Property Name="UEKAN" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Opt. overlapping"/>
+                <Property Name="FLIES" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Flowproductie"/>
+            </EntityType>
+            <EntityType Name="CRHDType" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="OBJTY"/>
+                    <PropertyRef Name="OBJID"/>
+                </Key>
+                <Property Name="OBJTY" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype"/>
+                <Property Name="OBJID" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="BEGDA" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Begindatum"/>
+                <Property Name="ENDDA" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Einddatum"/>
+                <Property Name="AEDAT_GRND" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Wijzigingsdatum"/>
+                <Property Name="AENAM_GRND" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gebruikersnaam"/>
+                <Property Name="AEDAT_VORA" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Wijzigingsdatum"/>
+                <Property Name="AENAM_VORA" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gebruikersnaam"/>
+                <Property Name="AEDAT_TERM" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Wijzigingsdatum"/>
+                <Property Name="AENAM_TERM" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gebruikersnaam"/>
+                <Property Name="AEDAT_TECH" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Wijzigingsdatum"/>
+                <Property Name="AENAM_TECH" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Gebruikersnaam"/>
+                <Property Name="ARBPL" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Werkplek"/>
+                <Property Name="WERKS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Vestiging"/>
+                <Property Name="VERWE" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Werkpleksoort"/>
+                <Property Name="LVORM" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Verwijdermarkering"/>
+                <Property Name="PAR01" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="1e parameter"/>
+                <Property Name="PAR02" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="2e parameter"/>
+                <Property Name="PAR03" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="3e parameter"/>
+                <Property Name="PAR04" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="4e parameter"/>
+                <Property Name="PAR05" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="5e parameter"/>
+                <Property Name="PAR06" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="6e parameter"/>
+                <Property Name="PARU1" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="PARU2" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="PARU3" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="PARU4" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="PARU5" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="PARU6" Type="Edm.String" MaxLength="3" sap:label="Eenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="PARV1" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="PARU1" sap:label="Parameterwaarde"/>
+                <Property Name="PARV2" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="PARU2" sap:label="Parameterwaarde"/>
+                <Property Name="PARV3" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="PARU3" sap:label="Parameterwaarde"/>
+                <Property Name="PARV4" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="PARU4" sap:label="Parameterwaarde"/>
+                <Property Name="PARV5" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="PARU5" sap:label="Parameterwaarde"/>
+                <Property Name="PARV6" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="PARU6" sap:label="Parameterwaarde"/>
+                <Property Name="PLANV" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Routinggebruik"/>
+                <Property Name="STAND" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Standplaats"/>
+                <Property Name="VERAN" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Werkplekverantwoord."/>
+                <Property Name="VGWTS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Standaardwaardecode"/>
+                <Property Name="VGM01" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Invoervoorschrift"/>
+                <Property Name="VGM02" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Invoervoorschrift"/>
+                <Property Name="VGM03" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Invoervoorschrift"/>
+                <Property Name="VGM04" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Invoervoorschrift"/>
+                <Property Name="VGM05" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Invoervoorschrift"/>
+                <Property Name="VGM06" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Invoervoorschrift"/>
+                <Property Name="XDEFA" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Defaultwaarden"/>
+                <Property Name="XKOST" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Kostenrekening"/>
+                <Property Name="XSPRR" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Geblokkeerd"/>
+                <Property Name="XTERM" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Indeling"/>
+                <Property Name="ZGR01" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR02" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR03" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR04" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR05" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="ZGR06" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Tijdfactorcode"/>
+                <Property Name="KTSCH" Type="Edm.String" MaxLength="7" sap:display-format="UpperCase" sap:label="Referentiecode"/>
+                <Property Name="LOANZ" Type="Edm.Decimal" Precision="3" Scale="0" sap:label="Aantal urenverantwSt"/>
+                <Property Name="LOART" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Looncomponent"/>
+                <Property Name="LOGRP" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Salarisschaal"/>
+                <Property Name="QUALF" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Kwalificatiegraad"/>
+                <Property Name="RASCH" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Omstelsoortcode"/>
+                <Property Name="STEUS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="VGE01" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGE02" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGE03" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGE04" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGE05" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="VGE06" Type="Edm.String" MaxLength="3" sap:label="Eenheid std.waarde" sap:semantics="unit-of-measure"/>
+                <Property Name="KTSCH_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="RefTk. refer.code"/>
+                <Property Name="LOART_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="RefTeken loonsoort"/>
+                <Property Name="LOANZ_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="RefTk. wrg. loonbr."/>
+                <Property Name="LOGRP_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Ref.teken loonschaal"/>
+                <Property Name="QUALF_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Ref.teken geschikth."/>
+                <Property Name="RASCH_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="RefTk. stelsoortcode"/>
+                <Property Name="STEUS_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="RefTk. bestur.code"/>
+                <Property Name="FORT1" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Duur stellen"/>
+                <Property Name="FORT2" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Duur bewerking"/>
+                <Property Name="FORT3" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Duur afbreken"/>
+                <Property Name="KAPID" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="ID capaciteit"/>
+                <Property Name="ORTGR" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Locatiegroep"/>
+                <Property Name="ZEIWN" Type="Edm.String" MaxLength="3" sap:label="Norm.wachttijdeenh." sap:semantics="unit-of-measure"/>
+                <Property Name="ZWNOR" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIWN" sap:label="Norm.wachttijd"/>
+                <Property Name="ZEIWM" Type="Edm.String" MaxLength="3" sap:label="Min.wachttijdeenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="ZWMIN" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="ZEIWM" sap:label="Min. wachttijd"/>
+                <Property Name="FORMR" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Formule capac.soort"/>
+                <Property Name="MATYP" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Machinetype"/>
+                <Property Name="CPLGR" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="CAP-planner"/>
+                <Property Name="SORTB" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Sorteerbegrip"/>
+                <Property Name="MTRVP" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Omstellen"/>
+                <Property Name="MTMVP" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Machine"/>
+                <Property Name="MTPVP" Type="Edm.Decimal" Precision="3" Scale="1" sap:label="Human Resources"/>
+                <Property Name="RSANZ" Type="Edm.String" MaxLength="3" sap:display-format="NonNegative" sap:label="Aant. terugmeldbonn."/>
+                <Property Name="PDEST" Type="Edm.String" MaxLength="30" sap:label="Printer"/>
+                <Property Name="HROID" Type="Edm.String" MaxLength="8" sap:display-format="NonNegative" sap:label="Object-ID"/>
+                <Property Name="FORTN" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Duur eigen activ."/>
+                <Property Name="ZGR01_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="ZGR02_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="ZGR03_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="ZGR04_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="ZGR05_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="ZGR06_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="STEUS_C" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="STEUS_I" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="STEUS_N" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="STEUS_Q" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Besturingscode"/>
+                <Property Name="RUZUS" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Afronding toeslagen"/>
+                <Property Name="RSANZ_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="RefTk aant.terugm.b."/>
+                <Property Name="HR" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Wplek in HR"/>
+                <Property Name="PRVBE" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="OHW-locatie"/>
+                <Property Name="SUBSYS" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="QDE-systeem"/>
+                <Property Name="BDEGR" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Indeling subsysteem"/>
+                <Property Name="RGEKZ" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Backflushing"/>
+                <Property Name="HRTYP" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Objecttype"/>
+                <Property Name="SLWID" Type="Edm.String" MaxLength="7" sap:display-format="UpperCase" sap:label="Veldkey"/>
+                <Property Name="LIFNR" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Crediteur"/>
+                <Property Name="SLWID_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="LIFNR_REF" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Referentieteken"/>
+                <Property Name="VGARB" Type="Edm.String" MaxLength="3" sap:label="Werkeenheid" sap:semantics="unit-of-measure"/>
+                <Property Name="VGDIM" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Werkdimensie"/>
+                <Property Name="HRPLVAR" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Planvariant"/>
+                <Property Name="VGDAU" Type="Edm.String" MaxLength="3" sap:label="Eenheid duur normaal" sap:semantics="unit-of-measure"/>
+                <Property Name="STOBJ" Type="Edm.String" MaxLength="22" sap:display-format="UpperCase" sap:label="Objectnummer"/>
+                <Property Name="RESGR" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Overgangsmatrix"/>
+                <Property Name="LGORT_RES" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Magazijn resource"/>
+                <Property Name="MIXMAT" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Mat. mengen toegest."/>
+                <Property Name="ISTBED_KZ" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Wrkl. cap. bep."/>
+                <Property Name="PPSKZ" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Uitgebreide planning"/>
+                <Property Name="SRTYPE" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Ploegrapporttype"/>
+                <Property Name="SNTYPE" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Ploegnotitiesoort"/>
+            </EntityType>
+            <Association Name="assoc_06B750711F8DF69595B950B801110F04" sap:content-version="1">
+                <End Type="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingParameters" Multiplicity="1" Role="FromRole_assoc_06B750711F8DF69595B950B801110F04"/>
+                <End Type="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingType" Multiplicity="*" Role="ToRole_assoc_06B750711F8DF69595B950B801110F04"/>
+            </Association>
+            <Association Name="assoc_6EC0CA84046520C1059B9363C1B5E379" sap:content-version="1">
+                <End Type="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingType" Multiplicity="1" Role="FromRole_assoc_6EC0CA84046520C1059B9363C1B5E379"/>
+                <End Type="ZPPC_CDS_ROUTING_CDS.CRHDType" Multiplicity="1" Role="ToRole_assoc_6EC0CA84046520C1059B9363C1B5E379"/>
+            </Association>
+            <Association Name="assoc_34CBE9BD39AF141E59BE0F2D878FDC5F" sap:content-version="1">
+                <End Type="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingType" Multiplicity="1" Role="FromRole_assoc_34CBE9BD39AF141E59BE0F2D878FDC5F"/>
+                <End Type="ZPPC_CDS_ROUTING_CDS.PLPOType" Multiplicity="1" Role="ToRole_assoc_34CBE9BD39AF141E59BE0F2D878FDC5F"/>
+            </Association>
+            <EntityContainer Name="ZPPC_CDS_ROUTING_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Zppc_Cds_RoutingSet" EntityType="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingType" sap:searchable="true" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="Zppc_Cds_Routing" EntityType="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="PLPO" EntityType="ZPPC_CDS_ROUTING_CDS.PLPOType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="CRHD" EntityType="ZPPC_CDS_ROUTING_CDS.CRHDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_6EC0CA84046520C1059B9363C1B5E379" Association="ZPPC_CDS_ROUTING_CDS.assoc_6EC0CA84046520C1059B9363C1B5E379" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_RoutingSet" Role="FromRole_assoc_6EC0CA84046520C1059B9363C1B5E379"/>
+                    <End EntitySet="CRHD" Role="ToRole_assoc_6EC0CA84046520C1059B9363C1B5E379"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_34CBE9BD39AF141E59BE0F2D878FDC5F" Association="ZPPC_CDS_ROUTING_CDS.assoc_34CBE9BD39AF141E59BE0F2D878FDC5F" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_RoutingSet" Role="FromRole_assoc_34CBE9BD39AF141E59BE0F2D878FDC5F"/>
+                    <End EntitySet="PLPO" Role="ToRole_assoc_34CBE9BD39AF141E59BE0F2D878FDC5F"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_06B750711F8DF69595B950B801110F04" Association="ZPPC_CDS_ROUTING_CDS.assoc_06B750711F8DF69595B950B801110F04" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Zppc_Cds_Routing" Role="FromRole_assoc_06B750711F8DF69595B950B801110F04"/>
+                    <End EntitySet="Zppc_Cds_RoutingSet" Role="ToRole_assoc_06B750711F8DF69595B950B801110F04"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZPPC_CDS_ROUTING_CDS.Zppc_Cds_RoutingType">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>Material</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPPC_CDS_ROUTING_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPPC_CDS_ROUTING_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

@@ -1,0 +1,110 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m" controllerName="PP_Cloostermans_routing.controller.Overview" displayBlock="true">
+	<App autoFocus="false">
+		<pages>
+			<Page title="{i18n>title}" id="overviewPage">
+				<content>
+					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="__header1"
+						backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true"/>
+					<HBox fitContainer="true" displayInline="true">
+						<VBox>
+							<Button id="addWorkcenter" text="add workcenter" press="addItemToTable" type="default"/>
+							<ScrollContainer vertical="true" height="85%" width="100%" headerText="Workcenters">
+								<List items="{list>/}" id="WorkcenterList" growingThreshold="10" headerText="Workcenters" includeItemInSelection="true"
+									mode="SingleSelectMaster" keyboardMode="Edit">
+									<!--<headerToolbar> items="{list>/}"
+								<Toolbar>
+									<Title text="Workcenters" level="H4"/>
+								</Toolbar>
+							</headerToolbar>-->
+									<items id="workcenters">
+										<StandardListItem title="{list>workplace}" description="{list>description}" info="{list>plant}"/>
+									</items>
+								</List>
+							</ScrollContainer>
+						</VBox>
+						<VBox direction="Column" displayInline="true">
+							<Table noDataText="Drop workcenters here or add a template" id="routingTable" headerText="Operations" items="{routingTable>/}"
+								includeItemInSelection="true" mode="SingleSelectMaster">
+								<columns>
+									<Column id="cOperation">
+										<header>
+											<Label text="Operation Number" id="lblOperation"/>
+										</header>
+									</Column>
+									<Column id="cWorkcenter">
+										<header>
+											<Label text="Workcenter" id="lblWorkc"/>
+										</header>
+									</Column>
+									<Column id="cControl">
+										<header>
+											<Label text="Control Key" id="lblControl"/>
+										</header>
+									</Column>
+									<Column id="cDescription">
+										<header>
+											<Label text="Description" id="lblDescription"/>
+										</header>
+									</Column>
+									<Column id="cSetup">
+										<header>
+											<Label text="Setup" id="lblSetup"/>
+										</header>
+									</Column>
+									<Column id="cMachine">
+										<header>
+											<Label text="Machine" id="lblMachine"/>
+										</header>
+									</Column>
+									<Column id="cLabor">
+										<header>
+											<Label text="Labor" id="lblLabor"/>
+										</header>
+									</Column>
+								</columns>
+								<items id="RoutingRecords">
+									<ColumnListItem id="Routings">
+										<cells>
+											<Text text="{routingTable>operationNumber}" id="Operation"/>
+										</cells>
+										<cells>
+											<Text text="{routingTable>workcenter}" id="workcenter"/>
+										</cells>
+										<cells>
+											<Text text="{routingTable>controlKey}" id="controlKey"/>
+										</cells>
+										<cells>
+											<TextArea value="{routingTable>operationDescription}" id="description"/>
+										</cells>
+										<cells>
+											<Input value="{routingTable>setupTime}" id="setup" placeholder="..." description="{routingTable>setupUnit}" />
+										</cells>
+										<cells>
+											<Input value="{routingTable>machineTime}" id="machine" placeholder="..." description="{routingTable>machineUnit}" />
+										</cells>
+										<cells>
+											<Input value="{routingTable>laborTime}" id="labor" placeholder="..." description="{routingTable>laborUnit}" />
+										</cells>
+									</ColumnListItem>
+								</items>
+								<infoToolbar>
+									<Toolbar width="100%" id="__toolbar2" design="Solid">
+										<content>
+											<ToolbarSpacer id="__spacer0"/><Button ariaLabelledBy="__xmlview0--lblDescription" id="btnEditSingleRecord" press="ActivateEditMode" icon="sap-icon://edit"/><Button id="__button0" color="white" icon="sap-icon://delete"/>
+										</content>
+									</Toolbar>
+								</infoToolbar>
+							</Table>
+							<CheckBox name="checkOverwrite" text="Overwrite existing operations"/>
+							<Button id="AddTemplate" text="Add to routings" press="onAddToRoutings" type="default"/>
+							<ComboBox id="comboTemplate" placeholder="Choose a template..." items="{comboTemplate>/}">
+								<core:ListItem key="{comboTemplate>routingGroupCode}" text="{comboTemplate>routingGroupCounter} {comboTemplate&gt;description}"/>
+							</ComboBox>
+						</VBox>
+					</HBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

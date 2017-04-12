@@ -1,0 +1,24 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form">
+	<Dialog
+		id="DetailsDialog"
+		title="Material Information">
+		<content>
+		<f:SimpleForm id="simpleFormChange" title="Details" editable="true" class="editableForm sapUiSmallMarginTopBottom">
+			<f:content>
+				<Label text="{i18n>layoutFormMaterialNumber}" labelFor="p_materialNumber"/>
+				<Input value="{MaterialNr}" id="p_materialNumber"/>
+				<Label text="{i18n>layoutFormPlant}"/>
+				<Input value="{Plant}" id="p_plant"/>
+				<Label text="{i18n>layoutFormRevision}"/>
+				<Input value="{Revision}" id="p_revision"/>
+			</f:content>
+		</f:SimpleForm>
+		</content>
+		<beginButton>
+			<Button id="Continue" text="Continue" press="Continue" type="Accept" visible="{= ${p_materialnumber} !== null &amp;&amp; ${p_plant} !== null &amp;&amp; ${p_revision} !== null }" />
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>
