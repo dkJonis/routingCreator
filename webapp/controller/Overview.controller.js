@@ -17,10 +17,10 @@ sap.ui.define([
 		 * @memberOf com.deklejoHelloWorld.view.App
 		 */
 		onInit: function() {
-			
+
 			oView = this.getView();
 			var that = this;
-			this.getOwnerComponent().getModel().metadataLoaded().then(function(oEvent) { 
+			this.getOwnerComponent().getModel().metadataLoaded().then(function(oEvent) {
 				services.setModel(that.getOwnerComponent().getModel());
 			});
 		},
@@ -42,7 +42,7 @@ sap.ui.define([
 
 			oDialog.open();
 		},
-		continue: function() {
+		_onContinue: function() {
 
 			var sMatnr = oView.byId("p_materialNumber").getValue();
 			var sPlant = oView.byId("p_plant").getValue();
@@ -57,48 +57,35 @@ sap.ui.define([
 			$.when(services.getWorkcenters(sPlant)).done(function(oData) {
 				oView.getModel("workcenter").setData(oData);
 			});
-			
+
+			$.when(services.getMaterialDetails(sMatnr)).done(function(oData) {
+				oView.getModel("materialDetails").setData(oData);
+			});
+
 			oRoutingTable = oView.byId("routingTable");
+			var that = this;
 			$.when(services.getRoutings(sMatnr, sPlant)).done(function(oData) {
 				oView.getModel("routing").setData(oData);
+				console.log(oView.getModel("routing").getData());
+				that.updateTableHeader();
 			});
-			
+
 			$.when(services.getTemplates()).done(function(oData) {
 				oView.getModel("template").setData(oData);
 			});
-
 
 			oDialog.close();
 
 		},
 		updateTableHeader: function() {
-			oRoutingTable.setHeaderText("Operations(" + oRoutingTable.getItems().length + ")");
+			oRoutingTable.setHeaderText("Operations(" + oView.getModel("routing").getData().length + ")");
+			console.log(oView.getModel("routing").getData());
+			console.log(oView.getModel("routing").getData().length);
 			console.log(oRoutingTable.getItems().length);
 		},
-		// TEST
-		addTemplate: function() {
-			var templateID = oView.byId("comboTemplate").getSelectedItem().getBindingContext("template").sPath;
-			console.log(templateID);
-			var oSelectedItem = oView.getModel("template").getProperty(templateID);
-			console.log(oSelectedItem);
-			var sRoutingGroupCode = oSelectedItem.routingGroupCode;
-			var sRoutingGroupCounter = oSelectedItem.routingGroupCounter;
-			console.log(oSelectedItem.routingGroupCounter);
-			
-			$.when(services.getTemplateItems(sRoutingGroupCounter, sRoutingGroupCode)).done(function(oData) {
-				oView.getModel("templateItems").setData(oData);
-				//addToRoutingTable
-			});
-			
-			console.log(oView.getModel("templateItems"));
-			console.log(oView.getModel("templateItems").getData());
-			
-		},
-		_onAddWorkcenter: function(oEvent)
-		{
+		_onAddWorkcenter: function(oEvent) {
 			var oWorkcList = oView.byId("WorkcenterList");
-			if (oWorkcList.getSelectedItem() === null) 
-			{
+			if (oWorkcList.getSelectedItem() === null) {
 				MessageToast.show("Please select a workcenter");
 			}
 			var oSelectedItem = oWorkcList.getSelectedItem().getBindingContext("workcenter").getObject();
@@ -115,47 +102,46 @@ sap.ui.define([
 			this.addToRoutingTable(addItem);
 		},
 		_onAddTemplate: function(oEvent) //list afhandelen binnen deze functie, aantal keren de addToRoutingTable functie oproepen
-		{
-			var that = this;
-			var oComboTemplate = oView.byId("comboTemplate");
-			if(oComboTemplate.getSelectedItem() === null)
 			{
-				MessageToast.show("Please select a workcenter");
-			}
-			var oSelectedItem = oComboTemplate.getSelectedItem().getBindingContext("template").getObject();
-			var sRoutingGroupCode = oSelectedItem.routingGroupCode;
-			var sRoutingGroupCounter = oSelectedItem.routingGroupCounter;
-			
-			$.when(services.getTemplateItems(sRoutingGroupCounter, sRoutingGroupCode)).done(function(oData) {
-				oView.getModel("templateItems").setData(oData);
-				
-				for(var x in oView.getModel("templateItems").getData())
-				{
-					var item = oView.getModel("templateItems").getProperty("/" + x);
-					console.log(item);
-					if(item !== null)
-					{
-						//console.log(item);
-						//addToRoutingTable(item);
-						that.addToRoutingTable(item);
-					}
-					
+				var that = this;
+				var oComboTemplate = oView.byId("comboTemplate");
+				if (oComboTemplate.getSelectedItem() === null) {
+					MessageToast.show("Please select a workcenter");
 				}
-			});
-		},
-		addToRoutingTable: function(addItem)
-		{
+				var oSelectedItem = oComboTemplate.getSelectedItem().getBindingContext("template").getObject();
+				var sRoutingGroupCode = oSelectedItem.routingGroupCode;
+				var sRoutingGroupCounter = oSelectedItem.routingGroupCounter;
+
+				var overwrite = oView.byId("overwriteCheck");
+				if (overwrite.getSelected() === true) {
+					oView.getModel("routing").getData().splice(0, oView.getModel("routing").getData().length);
+				}
+				$.when(services.getTemplateItems(sRoutingGroupCounter, sRoutingGroupCode)).done(function(oData) {
+					oView.getModel("templateItems").setData(oData);
+
+					for (var x in oView.getModel("templateItems").getData()) {
+						var item = oView.getModel("templateItems").getProperty("/" + x);
+						console.log(item);
+						if (item !== null) {
+							//console.log(item);
+							//addToRoutingTable(item);
+							that.addToRoutingTable(item);
+						}
+
+					}
+				});
+			},
+		addToRoutingTable: function(addItem) {
 			oView.getModel("routing").getData().push(addItem);
-			
+
 			oView.getModel("routing").refresh(true);
-			oRoutingTable.setHeaderText("Operations(" + oRoutingTable.getItems().length + ")");
+			this.updateTableHeader();
+			//oRoutingTable.setHeaderText("Operations(" + oRoutingTable.getItems().length + ")");
 		},
-		updateOperationNumbers: function(data)
-		{
+		updateOperationNumbers: function(data) {
 			var teller = 1;
 			var item;
-			for(var x in data)
-			{
+			for (var x in data) {
 				/*if(x === 0)
 				{
 					item = oView.getModel("routing").getProperty("/" + 0);
@@ -166,25 +152,143 @@ sap.ui.define([
 				item = oView.getModel("routing").getProperty("/" + x);
 				item.operationNumber = "00" + teller + "0";
 				//x.operationNumber =  "00" + teller + "0";
-			//}
+				//}
 				teller++;
 			}
 			oView.getModel("routing").setData(data);
-			oView.getModel("routing").refresh(true);
 		},
 		DeleteSelectedRecord: function() {
-			
+
 			if (oRoutingTable.getSelectedItem() === null) {
 				MessageToast.show("You didnt select a row");
 			}
 			var ID = (oRoutingTable.getSelectedItem().getBindingContext("routing").sPath);
-			
-			oView.getModel("routing").getData().splice(ID.substr(1,1),1);
+
+			oView.getModel("routing").getData().splice(ID.substr(1, 1), 1);
 			oView.getModel("routing").setData(oView.getModel("routing").getData());
 			//console.log(oView.getModel("routing").getData());
 			this.updateOperationNumbers(oView.getModel("routing").getData());
-			oView.getModel("routing").refresh(true);
 			this.updateTableHeader();
+		},
+		_onSaveRoutings: function() {
+			var matDetails = oView.getModel("materialDetails");
+			/*var task = {};
+			//task details ( PLKO )
+			//console.log(oView.byId("p_plant").getValue());
+			task.plant = oView.byId("p_plant").getValue();
+			task.TaskListUsage = "1";
+			task.TaskListStatus = "4";
+			task.TaskMeasureUnit = matDetails.getProperty("/" + 0).baseUnit;
+			task.Groupcounter = "";
+			console.log(matDetails);
+			console.log(task);
+
+			//MAPL
+			var matTaskAllocation = {};
+			matTaskAllocation.Material = oView.byId("p_materialNumber").getValue();
+			matTaskAllocation.Plant = oView.byId("p_plant").getValue();
+			matTaskAllocation.ValidFrom = new Date();
+			console.log(matTaskAllocation);*/
+
+			//PLPO
+
+			var operations = [];
+			console.log(oView.getModel("routing").getData());
+			console.log(oRoutingTable.getItems());
+			//console.log(oRoutingTable.getItems().mAggregations.cells.length);
+			var oModel = oView.getModel("routingCreate");
+			var operationAg = oRoutingTable.getAggregation("items");
+			//oView.getModel("routing").refresh(true);
+			for (var i = 0; i < oView.getModel("routing").getData().length; i++) {
+				var singleOperation = {};
+				var operationDetails = operationAg[i].getAggregation("cells");
+
+				// Data which has to be null in case its a new record that has to be created!!!
+				singleOperation.TaskListGroup = operationAg[i].getBindingContext("routing").getObject().routingGroupCode;
+				singleOperation.GroupCounter = operationAg[i].getBindingContext("routing").getObject().routingGroupCounter;
+				console.log(singleOperation.TaskListGroup);
+				console.log(singleOperation.GroupCounter);
+				
+				singleOperation.OperationMeasureUnit = matDetails.getProperty("/" + 0).baseUnit;
+				singleOperation.WorkCntr = operationDetails[1].getProperty("text");
+				singleOperation.ControlKey = operationDetails[2].getProperty("value");
+				singleOperation.Activity = operationDetails[0].getProperty("text");
+				singleOperation.ValidFrom = new Date();
+				singleOperation.Description = operationDetails[3].getProperty("value");
+				singleOperation.BaseQuantity = operationDetails[4].getProperty("value");
+				//singleOperation.baseUnit = matDetails.getProperty("/" + 0).baseUnit;
+				singleOperation.SetupTime = operationDetails[5].getProperty("value");
+				singleOperation.SetupUnit = operationDetails[5].getProperty("description");
+				singleOperation.MachineTime = operationDetails[6].getProperty("value");
+				singleOperation.MachineUnit = operationDetails[6].getProperty("description");
+				singleOperation.LaborTime = operationDetails[7].getProperty("value");
+				singleOperation.LaborUnit = operationDetails[7].getProperty("description");
+				//singleOperation.Denominator = 1;
+				//singleOperation.Nominator = 1;
+				if (singleOperation.LaborUnit === null) {
+					singleOperation.LaborUnit = operationDetails[5].getProperty("description");
+				}
+				if (singleOperation.MachineUnit === null) {
+					singleOperation.MachineUnit = operationDetails[5].getProperty("description");
+				}
+				//var single = oView.getModel("routing").getProperty("/" + i);
+				//operation.push(singleOperation);
+
+				operations.push(singleOperation);
+
+			}
+			var createData = {};
+			createData.Material = oView.byId("p_materialNumber").getValue();
+			//singleOperation.Groupcounter = "01";
+			createData.Plant = oView.byId("p_plant").getValue();
+			createData.TaskListUsage = "1";
+			createData.TaskListStatus = "4";
+			createData.TaskMeasureUnit = matDetails.getProperty("/" + 0).baseUnit;
+			createData.toOperations = operations;
+			console.log(createData);
+			//var createData = {};
+
+			//createData.materialtaskallocation = matTaskAllocation;
+			//createData.operation = operation;
+			//console.log(createData);
+			console.log(oModel);
+			oModel.create("/routingCreateSet", createData, {
+				success: function(oData) {
+					console.log(oData);
+					MessageToast.show("Saved " + operations.length);
+				},
+				error: function(err) {
+					console.log(err);
+					MessageToast.show("Nothing has been created");
+				}
+			});
+			/*for(var j = 0; j < operations.length; j++)
+			{
+				oModel.useBatch = false;
+				oModel.json = true;
+				oModel.create("/createRoutingSet", operations[j], null, function(oData) {
+				MessageToast.show("Saved " + j);
+			}, function(err) {
+				MessageToast.show("Nothing has been created");
+			});
+			}*/
+			//oModel.submitBatch()
+
+		},
+		_onCancel: function() {
+			//setten van verschillende json models op null
+
+			oView.byId("p_materialNumber").setValue("");
+			oView.byId("p_plant").setValue("");
+			oView.byId("p_revision").setValue("");
+			oView.getModel("workcenter").setData(null);
+			oView.getModel("routing").setData(null);
+			oView.getModel("template").setData(null);
+			oView.getModel("params").setData(null);
+			oView.getModel("materialDetails").setData(null);
+
+			//heropenen dialog.
+			oDialog.open();
 
 		}
 

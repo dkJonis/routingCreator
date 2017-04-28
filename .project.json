@@ -25,7 +25,7 @@
     {
       "templateId": "servicecatalog.connectivityComponent",
       "templateVersion": "0.0.0",
-      "dateTimeStamp": "Tue, 11 Apr 2017 10:37:37 GMT"
+      "dateTimeStamp": "Tue, 18 Apr 2017 09:26:37 GMT"
     }
   ],
   "translation": {
@@ -48,7 +48,7 @@
     "blockPushLevel": "Error"
   },
   "mockpreview": {
-    "mockUri": "/sap/opu/odata/sap/ZROUTING_CREATOR_SRV",
+    "mockUri": "/sap/opu/odata/sap/ZBAPI_TEST_SRV",
     "metadataFilePath": "localService/metadata.xml",
     "loadJSONFiles": false,
     "loadCustomRequests": false,

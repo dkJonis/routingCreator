@@ -3,7 +3,7 @@
 		<pages>
 			<Page title="{i18n>title}" id="overviewPage" backgroundDesign="Transparent">
 				<content>
-					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="__header1" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true"/>
+					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true" fullScreenOptimized="true"/>
 					<HBox fitContainer="true" displayInline="true">
 						<VBox id="leftBox">
 							<Button id="addWorkcenter" text="add workcenter" press="_onAddWorkcenter" type="default"/>
@@ -21,7 +21,7 @@
 							</ScrollContainer>
 						</VBox>
 						<VBox direction="Column" displayInline="true">
-							<Table noDataText="Drop workcenters here or add a template" id="routingTable" headerText="Operations" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster">
+							<Table noDataText="Drop workcenters here or add a template" id="routingTable" headerText="Operations" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster" growingThreshold="4" growing="true">
 								<columns>
 									<Column id="cOperation">
 										<header>
@@ -43,6 +43,11 @@
 											<Label text="Description" id="lblDescription"/>
 										</header>
 									</Column>
+									<Column id="baseUnit">
+										<header>
+											<Label text="BaseQuantity" id="lblBaseQuantity"/>
+										</header>
+									</Column>
 									<Column id="cSetup">
 										<header>
 											<Label text="Setup" id="lblSetup"/>
@@ -62,16 +67,19 @@
 								<items id="RoutingRecords">
 									<ColumnListItem id="Routings">
 										<cells>
-											<Text text="{routing>operationNumber}" id="Operation"/>
+											<Text text="{routing>operationNumber}" id="operation"/>
 										</cells>
 										<cells>
 											<Text text="{routing>workcenter}" id="workcenter"/>
 										</cells>
 										<cells>
-											<Text text="{routing>controlKey}" id="controlKey"/>
+											<Input value="{routing>controlKey}" id="controlKey"/>
 										</cells>
 										<cells>
 											<TextArea value="{routing>operationDescription}" id="description"/>
+										</cells>
+										<cells>
+											<Input value="{routing>baseQuantity}" id="baseQuantity"/>
 										</cells>
 										<cells>
 											<Input value="{routing>setupTime}" id="setup" placeholder="..." description="{routing>setupUnit}"/>
@@ -95,7 +103,7 @@
 							    <core:CustomData key="w5g.dt.editable" value="true" id="__data20"/>
 							</customData>
 							</Table>
-							<CheckBox name="checkOverwrite" text="Overwrite existing operations"/>
+							<CheckBox name="checkOverwrite" id="overwriteCheck" text="Overwrite existing operations"/>
 							<Button id="AddTemplate" text="Add to routings" press="_onAddTemplate" type="default"/>
 							<ComboBox id="comboTemplate" placeholder="Choose a template..." items="{template>/}">
 								<core:ListItem key="{template>routingGroupCode}" text="0{template>routingGroupCounter} {template&gt;description}"/>
@@ -103,6 +111,14 @@
 						</VBox>
 					</HBox>
 				</content>
+			<footer>
+			    <Bar id="__bar0">
+			        <contentRight>
+			            <Button text="Save" id="__button0" press="_onSaveRoutings" type="Accept"/>
+			            <Button text="Cancel" id="__button1" press="_onCancel" type="Reject"/>
+			        </contentRight>
+			    </Bar>
+			</footer>
 			</Page>
 		</pages>
 	</App>

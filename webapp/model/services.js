@@ -62,6 +62,18 @@ sap.ui.define([
 				}
 			});
 			return d.promise(); 
+		},
+		getMaterialDetails: function(matnr) {
+			
+			var d = $.Deferred();
+			
+			this.model.read("/ZPPC_GETMATDETAILS(p_matnr='" + matnr + "')/Set", {
+				success: function(oData)
+				{
+					d.resolve(oData.results);
+				}
+			});
+			return d.promise(); 
 		}
 	});
 	

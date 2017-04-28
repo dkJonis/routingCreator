@@ -1,0 +1,61 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:Reference
+        xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Uri="./IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZPPC_GETMATDETAILS_CDS" xml:lang="nl" sap:schema-version="1">
+            <EntityType Name="ZPPC_GETMATDETAILSType" sap:label="consumption for mat details" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_matnr"/>
+                    <PropertyRef Name="material"/>
+                </Key>
+                <Property Name="p_matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:label="Artikel"/>
+                <Property Name="material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Artikel" sap:quickinfo="Artikelnummer"/>
+                <Property Name="kunnr" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Concurrent"/>
+                <Property Name="lvorm" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="VM mandantniveau" sap:quickinfo="Artikel op mandantniveau voor verwijdering markeren"/>
+                <Property Name="magrv" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Artikelgroep VHM" sap:quickinfo="Artikelgroep verpakkingshulpmiddelen"/>
+                <Property Name="mandt" Type="Edm.String" MaxLength="3" sap:label="Mandant"/>
+                <Property Name="matfi" Type="Edm.Boolean" sap:display-format="UpperCase" sap:label="Artikel is gefixeerd"/>
+                <Property Name="matkl" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Goederengroep"/>
+                <Property Name="baseUnit" Type="Edm.String" MaxLength="3" sap:label="Basishoevh.eenheid" sap:quickinfo="Basishoeveelheidseenheid" sap:semantics="unit-of-measure"/>
+                <NavigationProperty Name="Parameters" Relationship="ZPPC_GETMATDETAILS_CDS.assoc_1D2A4267D670D447BA2F3DA7063EC672" FromRole="ToRole_assoc_1D2A4267D670D447BA2F3DA7063EC672" ToRole="FromRole_assoc_1D2A4267D670D447BA2F3DA7063EC672" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZPPC_GETMATDETAILSParameters" sap:semantics="parameters" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="p_matnr"/>
+                </Key>
+                <Property Name="p_matnr" Type="Edm.String" Nullable="false" MaxLength="40" sap:parameter="mandatory" sap:label="Artikel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Set" Relationship="ZPPC_GETMATDETAILS_CDS.assoc_1D2A4267D670D447BA2F3DA7063EC672" FromRole="FromRole_assoc_1D2A4267D670D447BA2F3DA7063EC672" ToRole="ToRole_assoc_1D2A4267D670D447BA2F3DA7063EC672"/>
+            </EntityType>
+            <Association Name="assoc_1D2A4267D670D447BA2F3DA7063EC672" sap:content-version="1">
+                <End Type="ZPPC_GETMATDETAILS_CDS.ZPPC_GETMATDETAILSParameters" Multiplicity="1" Role="FromRole_assoc_1D2A4267D670D447BA2F3DA7063EC672"/>
+                <End Type="ZPPC_GETMATDETAILS_CDS.ZPPC_GETMATDETAILSType" Multiplicity="*" Role="ToRole_assoc_1D2A4267D670D447BA2F3DA7063EC672"/>
+            </Association>
+            <EntityContainer Name="ZPPC_GETMATDETAILS_CDS_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZPPC_GETMATDETAILSSet" EntityType="ZPPC_GETMATDETAILS_CDS.ZPPC_GETMATDETAILSType" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="ZPPC_GETMATDETAILS" EntityType="ZPPC_GETMATDETAILS_CDS.ZPPC_GETMATDETAILSParameters" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_1D2A4267D670D447BA2F3DA7063EC672" Association="ZPPC_GETMATDETAILS_CDS.assoc_1D2A4267D670D447BA2F3DA7063EC672" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZPPC_GETMATDETAILS" Role="FromRole_assoc_1D2A4267D670D447BA2F3DA7063EC672"/>
+                    <End EntitySet="ZPPC_GETMATDETAILSSet" Role="ToRole_assoc_1D2A4267D670D447BA2F3DA7063EC672"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations
+                xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="ZPPC_GETMATDETAILS_CDS.ZPPC_GETMATDETAILSType">
+                <Annotation Term="Common.SemanticKey">
+                    <Collection>
+                        <PropertyPath>material</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZPPC_GETMATDETAILS_CDS/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZPPC_GETMATDETAILS_CDS/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

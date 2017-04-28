@@ -1,0 +1,39 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="ZBAPI_TEST_SRV" xml:lang="nl" sap:schema-version="1">
+            <EntityType Name="createRouting" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Group" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Routinggroep" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:unicode="false" sap:label="Artikel" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Groupcounter" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Routinggrptell." sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Vestiging" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValidFrom" Type="Edm.DateTime" Precision="8" sap:unicode="false" sap:label="Geldig van" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValidToDate" Type="Edm.DateTime" Precision="8" sap:unicode="false" sap:label="tot" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Activity" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Operatie" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ControlKey" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Besturingscode" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="WorkCntr" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Werkplek" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="OperationMeasureUnit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Hoevh.eh oper." sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="Denominator" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="0" sap:unicode="false" sap:label="Noemer" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nominator" Type="Edm.Decimal" Nullable="false" Precision="5" Scale="0" sap:unicode="false" sap:label="Teller" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BaseQuantity" Type="Edm.Decimal" Nullable="false" Precision="13" Scale="3" sap:unicode="false" sap:label="Basishoevh." sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TaskListUsage" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Gebruik" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TaskListStatus" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Status" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TaskMeasureUnit" Type="Edm.String" Nullable="false" MaxLength="3" sap:unicode="false" sap:label="Hvh.Eh routing" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityContainer Name="ZBAPI_TEST_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="createRoutingSet" EntityType="ZBAPI_TEST_SRV.createRouting" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link
+                xmlns:atom="http://www.w3.org/2005/Atom" rel="self" href="./sap/ZBAPI_TEST_SRV/$metadata"/>
+                <atom:link
+                    xmlns:atom="http://www.w3.org/2005/Atom" rel="latest-version" href="./sap/ZBAPI_TEST_SRV/$metadata"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>

@@ -27,6 +27,7 @@ sap.ui.define([
 			this.setModel(models.createRoutingModel(), "routing");
 			this.setModel(models.createTemplateModel(), "template");
 			this.setModel(models.createTemplateItemsModel(), "templateItems");
+			this.setModel(models.createMaterialDetailsModel(), "materialDetails");
 			
 			this.getRouter().initialize();
 		}

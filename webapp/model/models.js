@@ -30,6 +30,11 @@ sap.ui.define([
 			var oModel = new JSONModel();
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
+		},
+		createMaterialDetailsModel: function() {
+			var oModel = new JSONModel();
+			oModel.setDefaultBindingMode("OneWay");
+			return oModel;
 		}
 
 	};
