@@ -1,9 +1,11 @@
+/* global interact:true */
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageToast",
 	"sap/ui/model/Filter",
-	"com/flexso/routingbuilder/model/services"
-], function(Controller, MessageToast, Filter, services) {
+	"com/flexso/routingbuilder/model/services",
+	"com/flexso/routingbuilder/libs/interact"
+], function(Controller, MessageToast, Filter, services, interactjs) {
 	"use strict";
 	var oView;
 	var oRoutingTable;
@@ -23,6 +25,7 @@ sap.ui.define([
 			this.getOwnerComponent().getModel().metadataLoaded().then(function(oEvent) {
 				services.setModel(that.getOwnerComponent().getModel());
 			});
+			interactjs();
 		},
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -196,7 +199,7 @@ sap.ui.define([
 			console.log(oView.getModel("routing").getData());
 			console.log(oRoutingTable.getItems());
 			//console.log(oRoutingTable.getItems().mAggregations.cells.length);
-			var oModel = oView.getModel("routingCreate");
+			var oModel = oView.getModel();
 			var operationAg = oRoutingTable.getAggregation("items");
 			//oView.getModel("routing").refresh(true);
 			for (var i = 0; i < oView.getModel("routing").getData().length; i++) {
@@ -206,8 +209,14 @@ sap.ui.define([
 				// Data which has to be null in case its a new record that has to be created!!!
 				singleOperation.TaskListGroup = operationAg[i].getBindingContext("routing").getObject().routingGroupCode;
 				singleOperation.GroupCounter = operationAg[i].getBindingContext("routing").getObject().routingGroupCounter;
-				console.log(singleOperation.TaskListGroup);
-				console.log(singleOperation.GroupCounter);
+				//console.log(singleOperation.TaskListGroup);
+				//console.log(singleOperation.GroupCounter);
+				
+				/*if( singleOperation.TaskListGroup !== null && singleOperation.GroupCounter !== null)
+				{
+					// nog testen
+					oModel.remove("/routingCreateSet", singleOperation.TaskListGroup, singleOperation.GroupCounter, i);
+				}*/
 				
 				singleOperation.OperationMeasureUnit = matDetails.getProperty("/" + 0).baseUnit;
 				singleOperation.WorkCntr = operationDetails[1].getProperty("text");
@@ -216,6 +225,7 @@ sap.ui.define([
 				singleOperation.ValidFrom = new Date();
 				singleOperation.Description = operationDetails[3].getProperty("value");
 				singleOperation.BaseQuantity = operationDetails[4].getProperty("value");
+				singleOperation.Plant = oView.byId("p_plant").getValue();
 				//singleOperation.baseUnit = matDetails.getProperty("/" + 0).baseUnit;
 				singleOperation.SetupTime = operationDetails[5].getProperty("value");
 				singleOperation.SetupUnit = operationDetails[5].getProperty("description");

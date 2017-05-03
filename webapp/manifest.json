@@ -45,14 +45,6 @@
 					"odataVersion": "2.0",
 					"localUri": "localService/ZROUTING_CREATOR_SRV/metadata.xml"
 				}
-			},
-			"ZBAPI_TEST_SRV": {
-				"uri": "/sap/opu/odata/sap/ZBAPI_TEST_SRV/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "2.0",
-					"localUri": "localService/ZBAPI_TEST_SRV/metadata.xml"
-				}
 			}
 		}
 	},

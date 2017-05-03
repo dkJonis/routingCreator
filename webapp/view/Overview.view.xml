@@ -15,7 +15,7 @@
 								</Toolbar>
 							</headerToolbar>-->
 									<items id="workcenters">
-										<StandardListItem title="{workcenter>workplace}" description="{workcenter>description}" info="{workcenter>plant}"/>
+										<StandardListItem class="" title="{workcenter>workplace}" description="{workcenter>description}" info="{workcenter>plant}"/>
 									</items>
 								</List>
 							</ScrollContainer>
