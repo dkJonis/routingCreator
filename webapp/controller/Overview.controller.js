@@ -25,8 +25,9 @@ sap.ui.define([
 			this.getOwnerComponent().getModel().metadataLoaded().then(function(oEvent) {
 				services.setModel(that.getOwnerComponent().getModel());
 			});
-			interactjs();
+
 		},
+
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
@@ -42,6 +43,104 @@ sap.ui.define([
 
 				oView.addDependent(oDialog);
 			}
+			var that = this;
+
+			// interactjs
+			interact(".draggable")
+				.draggable({
+					// enable inertial throwing
+					inertia: false,
+					// keep the element within the area of it's parent
+					restrict: {
+						//restriction: "parent",
+						drag: oView.byId("mainContainer"),
+						endOnly: true
+					},
+
+					// call this function on every dragmove event
+					onmove: dragMoveListener,
+					// call this function on every dragend event
+					onend: function(event) {
+						
+						var target = event.target;
+
+						target.style.webkitTransform =
+							target.style.transform =
+							'translate(' + 0 + 'px, ' + 0 + 'px)';
+
+						// set target position to original position
+						target.setAttribute("data-x", 0);
+						target.setAttribute("data-y", 0);
+
+					}
+				});
+
+			function dragMoveListener(event) {
+				var target = event.target,
+					// keep the dragged position in the data-x/data-y attributes
+					x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+					y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+				// translate the element
+				target.style.webkitTransform =
+					target.style.transform =
+					'translate(' + x + 'px, ' + y + 'px)';
+
+				// update the posiion attributes
+				target.setAttribute('data-x', x);
+				target.setAttribute('data-y', y);
+			}
+
+			// this is used later in the resizing and gesture demos
+			window.dragMoveListener = dragMoveListener;
+
+			interact('.dropzone').dropzone({
+				// only accept elements matching this CSS selector
+				accept: ".draggable",
+				// Require a 75% element overlap for a drop to be possible
+				overlap: 0.75,
+
+				// listen for drop related events:
+
+				ondropactivate: function(event) {
+					// add active dropzone feedback
+					event.target.classList.add('drop-active');
+				},
+				ondragenter: function(event) {
+					var draggableElement = event.relatedTarget,
+						dropzoneElement = event.target;
+
+					// feedback the possibility of a drop
+					dropzoneElement.classList.add('drop-target');
+					draggableElement.classList.add('can-drop');
+				},
+				ondragleave: function(event) {
+					// remove the drop feedback style
+					event.target.classList.remove('drop-target');
+					event.relatedTarget.classList.remove('can-drop');
+				},
+				ondrop: function(event) {
+					
+					var relatedTarget = oView.getModel("workcenter").getProperty("/" + event.relatedTarget.id.slice(-1));
+
+					var addItem = {
+						operationNumber: "00" + (oRoutingTable.getItems().length + 1) + "0",
+						workcenter: relatedTarget.workplace,
+						controlKey: relatedTarget.controlKey,
+						operationDescription: relatedTarget.description,
+						setupUnit: relatedTarget.setupUnit,
+						machineUnit: relatedTarget.machineUnit,
+						laborUnit: relatedTarget.laborUnit
+					};
+					that.addToRoutingTable(addItem);
+
+				},
+				ondropdeactivate: function(event) {
+					// remove active dropzone feedback
+					event.target.classList.remove('drop-active');
+					event.target.classList.remove('drop-target');
+				}
+			});
 
 			oDialog.open();
 		},
@@ -69,7 +168,6 @@ sap.ui.define([
 			var that = this;
 			$.when(services.getRoutings(sMatnr, sPlant)).done(function(oData) {
 				oView.getModel("routing").setData(oData);
-				console.log(oView.getModel("routing").getData());
 				that.updateTableHeader();
 			});
 
@@ -81,10 +179,8 @@ sap.ui.define([
 
 		},
 		updateTableHeader: function() {
-			oRoutingTable.setHeaderText("Operations(" + oView.getModel("routing").getData().length + ")");
-			console.log(oView.getModel("routing").getData());
-			console.log(oView.getModel("routing").getData().length);
-			console.log(oRoutingTable.getItems().length);
+			var title = oView.byId("tableTitle");
+			title.setText("Operations(" + oView.getModel("routing").getData().length + ")");
 		},
 		_onAddWorkcenter: function(oEvent) {
 			var oWorkcList = oView.byId("WorkcenterList");
@@ -92,7 +188,6 @@ sap.ui.define([
 				MessageToast.show("Please select a workcenter");
 			}
 			var oSelectedItem = oWorkcList.getSelectedItem().getBindingContext("workcenter").getObject();
-			console.log(oSelectedItem);
 			var addItem = {
 				operationNumber: "00" + (oRoutingTable.getItems().length + 1) + "0",
 				workcenter: oSelectedItem.workplace,
@@ -124,10 +219,7 @@ sap.ui.define([
 
 					for (var x in oView.getModel("templateItems").getData()) {
 						var item = oView.getModel("templateItems").getProperty("/" + x);
-						console.log(item);
 						if (item !== null) {
-							//console.log(item);
-							//addToRoutingTable(item);
 							that.addToRoutingTable(item);
 						}
 
@@ -145,17 +237,9 @@ sap.ui.define([
 			var teller = 1;
 			var item;
 			for (var x in data) {
-				/*if(x === 0)
-				{
-					item = oView.getModel("routing").getProperty("/" + 0);
-					item.operationNumber = "00" + teller + "0";
-					console.log(item);
-				}
-				else if(x !== 0) {*/
+				
 				item = oView.getModel("routing").getProperty("/" + x);
 				item.operationNumber = "00" + teller + "0";
-				//x.operationNumber =  "00" + teller + "0";
-				//}
 				teller++;
 			}
 			oView.getModel("routing").setData(data);
@@ -196,8 +280,6 @@ sap.ui.define([
 			//PLPO
 
 			var operations = [];
-			console.log(oView.getModel("routing").getData());
-			console.log(oRoutingTable.getItems());
 			//console.log(oRoutingTable.getItems().mAggregations.cells.length);
 			var oModel = oView.getModel();
 			var operationAg = oRoutingTable.getAggregation("items");
@@ -211,13 +293,13 @@ sap.ui.define([
 				singleOperation.GroupCounter = operationAg[i].getBindingContext("routing").getObject().routingGroupCounter;
 				//console.log(singleOperation.TaskListGroup);
 				//console.log(singleOperation.GroupCounter);
-				
+
 				/*if( singleOperation.TaskListGroup !== null && singleOperation.GroupCounter !== null)
 				{
 					// nog testen
 					oModel.remove("/routingCreateSet", singleOperation.TaskListGroup, singleOperation.GroupCounter, i);
 				}*/
-				
+
 				singleOperation.OperationMeasureUnit = matDetails.getProperty("/" + 0).baseUnit;
 				singleOperation.WorkCntr = operationDetails[1].getProperty("text");
 				singleOperation.ControlKey = operationDetails[2].getProperty("value");
@@ -233,20 +315,19 @@ sap.ui.define([
 				singleOperation.MachineUnit = operationDetails[6].getProperty("description");
 				singleOperation.LaborTime = operationDetails[7].getProperty("value");
 				singleOperation.LaborUnit = operationDetails[7].getProperty("description");
-				//singleOperation.Denominator = 1;
-				//singleOperation.Nominator = 1;
+
 				if (singleOperation.LaborUnit === null) {
 					singleOperation.LaborUnit = operationDetails[5].getProperty("description");
 				}
 				if (singleOperation.MachineUnit === null) {
 					singleOperation.MachineUnit = operationDetails[5].getProperty("description");
 				}
-				//var single = oView.getModel("routing").getProperty("/" + i);
-				//operation.push(singleOperation);
+
 
 				operations.push(singleOperation);
 
 			}
+			// uiteindelijk object dat doorgegeven wordt aan de create functionaliteiten binnen de ODATA
 			var createData = {};
 			createData.Material = oView.byId("p_materialNumber").getValue();
 			//singleOperation.Groupcounter = "01";
@@ -255,34 +336,16 @@ sap.ui.define([
 			createData.TaskListStatus = "4";
 			createData.TaskMeasureUnit = matDetails.getProperty("/" + 0).baseUnit;
 			createData.toOperations = operations;
-			console.log(createData);
-			//var createData = {};
 
-			//createData.materialtaskallocation = matTaskAllocation;
-			//createData.operation = operation;
-			//console.log(createData);
-			console.log(oModel);
+			// Hier gebeurt nog iets raar, record wordt wel aangepast,... maar toch krijg ik de messageToast van de error function.
 			oModel.create("/routingCreateSet", createData, {
 				success: function(oData) {
-					console.log(oData);
 					MessageToast.show("Saved " + operations.length);
 				},
 				error: function(err) {
-					console.log(err);
 					MessageToast.show("Nothing has been created");
 				}
 			});
-			/*for(var j = 0; j < operations.length; j++)
-			{
-				oModel.useBatch = false;
-				oModel.json = true;
-				oModel.create("/createRoutingSet", operations[j], null, function(oData) {
-				MessageToast.show("Saved " + j);
-			}, function(err) {
-				MessageToast.show("Nothing has been created");
-			});
-			}*/
-			//oModel.submitBatch()
 
 		},
 		_onCancel: function() {
@@ -299,7 +362,6 @@ sap.ui.define([
 
 			//heropenen dialog.
 			oDialog.open();
-
 		}
 
 	});

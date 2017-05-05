@@ -4,3 +4,9 @@
 	border: 1px solid #cccccc;
 	border-top: none;
 }
+#__xmlview0--dragobject {
+	z-index: 9999;
+}
+drop-active {
+	z-index:999;
+}

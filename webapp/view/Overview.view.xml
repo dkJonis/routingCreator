@@ -4,24 +4,27 @@
 			<Page title="{i18n>title}" id="overviewPage" backgroundDesign="Transparent">
 				<content>
 					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true" fullScreenOptimized="true"/>
-					<HBox fitContainer="true" displayInline="true">
+					<HBox id="mainContainer" fitContainer="true" displayInline="true">
 						<VBox id="leftBox">
-							<Button id="addWorkcenter" text="add workcenter" press="_onAddWorkcenter" type="default"/>
+							<items>
+							    <Toolbar width="100%" id="__toolbar3">
+							        <content>
+							            <Title text="Workcenters" titleStyle="H4"/>
+							            <ToolbarSpacer id="__spacer1"/>
+							            <Button id="addWorkcenter" press="_onAddWorkcenter" type="default" icon="sap-icon://add"/>
+							        </content>
+							    </Toolbar>
+							</items>
 							<ScrollContainer vertical="true" height="85%" width="100%" headerText="Workcenters">
-								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" headerText="Workcenters" includeItemInSelection="true" mode="SingleSelectMaster" backgroundDesign="Transparent" rememberSelections="false">
-									<!--<headerToolbar> items="{list>/}"
-								<Toolbar>
-									<Title text="Workcenters" level="H4"/>
-								</Toolbar>
-							</headerToolbar>-->
+								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" includeItemInSelection="true" mode="SingleSelectMaster" backgroundDesign="Transparent" rememberSelections="false">
 									<items id="workcenters">
-										<StandardListItem class="" title="{workcenter>workplace}" description="{workcenter>description}" info="{workcenter>plant}"/>
+	<!-- record to be dragged -->		<StandardListItem class="draggable" title="{workcenter>workplace}" description="{workcenter>description}" info="{workcenter>plant}" adaptTitleSize="false"/>
 									</items>
 								</List>
 							</ScrollContainer>
 						</VBox>
 						<VBox direction="Column" displayInline="true">
-							<Table noDataText="Drop workcenters here or add a template" id="routingTable" headerText="Operations" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster" growingThreshold="4" growing="true">
+<!-- place to drop record --><Table class="dropzone" noDataText="Drop workcenters here or add a template" id="routingTable" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster" growingThreshold="4" growing="true">
 								<columns>
 									<Column id="cOperation">
 										<header>
@@ -53,7 +56,7 @@
 											<Label text="Setup" id="lblSetup"/>
 										</header>
 									</Column>
-									<Column id="cMachine">
+									<Column id="cMachine" popinHAlign="Initial">
 										<header>
 											<Label text="Machine" id="lblMachine"/>
 										</header>
@@ -82,19 +85,20 @@
 											<Input value="{routing>baseQuantity}" id="baseQuantity"/>
 										</cells>
 										<cells>
-											<Input value="{routing>setupTime}" id="setup" placeholder="..." description="{routing>setupUnit}"/>
+											<Input value="{routing>setupTime}" id="setup" placeholder="..." description="{routing>setupUnit}" fieldWidth="60%" startSuggestion="2"/>
 										</cells>
 										<cells>
-											<Input value="{routing>machineTime}" id="machine" placeholder="..." description="{routing>machineUnit}"/>
+											<Input value="{routing>machineTime}" id="machine" placeholder="..." description="{routing>machineUnit}" fieldWidth="60%" startSuggestion="2"/>
 										</cells>
 										<cells>
-											<Input value="{routing>laborTime}" id="labor" placeholder="..." description="{routing>laborUnit}"/>
+											<Input value="{routing>laborTime}" id="labor" placeholder="..." description="{routing>laborUnit}" fieldWidth="60%" startSuggestion="2"/>
 										</cells>
 									</ColumnListItem>
 								</items>
 								<infoToolbar>
-									<Toolbar width="100%" id="__toolbar2" design="Solid">
+									<Toolbar width="100%" id="__toolbar2" design="Transparent">
 										<content>
+											<Title text="Operations" id="tableTitle" titleStyle="H4"/>
 											<ToolbarSpacer id="__spacer0"/><Button id="btnDeleteRow" color="white" icon="sap-icon://delete" press="DeleteSelectedRecord"/>
 										</content>
 									</Toolbar>

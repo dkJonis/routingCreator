@@ -103,16 +103,6 @@
 				},
 				"dataSource": "ZROUTING_CREATOR_SRV",
 				"preload": true
-			},
-			"routingCreate": {
-				"type": "sap.ui.model.odata.v2.ODataModel",
-				"settings": {
-					"defaultOperationMode": "Server",
-					"defaultBindingMode": "OneTime",
-					"defaultCountMode": "Request"
-				},
-				"dataSource": "ZBAPI_TEST_SRV",
-				"preload": true
 			}
 		},
 		"resources": {
