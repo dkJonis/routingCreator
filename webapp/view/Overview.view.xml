@@ -1,69 +1,69 @@
-<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:smartTable="sap.ui.comp.smarttable" xmlns="sap.m" controllerName="com.flexso.routingbuilder.controller.Overview" displayBlock="true">
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:table="sap.ui.table" xmlns="sap.m" controllerName="com.flexso.routingbuilder.controller.Overview" displayBlock="true">
 	<App autoFocus="false">
 		<pages>
 			<Page title="{i18n>title}" id="overviewPage" backgroundDesign="Transparent">
 				<content>
-					<ObjectHeader title="Material: {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" responsive="true" fullScreenOptimized="true"/>
+					<ObjectHeader title="{i18n>materialHeader} {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" fullScreenOptimized="true"/>
 					<HBox id="mainContainer" fitContainer="true" displayInline="true">
-						<VBox id="leftBox">
+						<VBox id="leftBox" width="25%">
 							<items>
 							    <Toolbar width="100%" id="__toolbar3">
 							        <content>
-							            <Title text="Workcenters" titleStyle="H4"/>
+							            <Title text="{i18n>headerWorkcenter}" titleStyle="H4"/>
 							            <ToolbarSpacer id="__spacer1"/>
-							            <Button id="addWorkcenter" press="_onAddWorkcenter" type="default" icon="sap-icon://add"/>
+							            <Button id="addWorkcenter" press="onAddWorkcenter" type="default" icon="sap-icon://add"/>
 							        </content>
 							    </Toolbar>
 							</items>
-							<ScrollContainer vertical="true" height="85%" width="100%" headerText="Workcenters">
+							<ScrollContainer vertical="true" height="85%" width="100%">
 								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" includeItemInSelection="true" mode="SingleSelectMaster" backgroundDesign="Transparent" rememberSelections="false">
 									<items id="workcenters">
-	<!-- record to be dragged -->		<StandardListItem class="draggable" title="{workcenter>workplace}" description="{workcenter>description}" info="{workcenter>plant}" adaptTitleSize="false"/>
+	<!-- record to be dragged -->		<StandardListItem class="draggable" title="{workcenter>workplace}" description="{workcenter>description}" adaptTitleSize="false"/>
 									</items>
 								</List>
 							</ScrollContainer>
 						</VBox>
 						<VBox direction="Column" displayInline="true">
-<!-- place to drop record --><Table class="dropzone" noDataText="Drop workcenters here or add a template" id="routingTable" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster" growingThreshold="4" growing="true">
+<!-- place to drop record --><Table class="dropzone" noDataText="{i18n>noTableItemsFound}" id="routingTable" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster" growingThreshold="4" growing="true" fixedLayout="false">
 								<columns>
-									<Column id="cOperation">
+									<Column id="cOperation" width="10%">
 										<header>
-											<Label text="Operation Number" id="lblOperation"/>
+											<Label text="{i18n>tableOperationNumber}" id="lblOperation"/>
 										</header>
 									</Column>
-									<Column id="cWorkcenter">
+									<Column id="cWorkcenter" width="10%">
 										<header>
-											<Label text="Workcenter" id="lblWorkc"/>
+											<Label text="{i18n>tableWorkcenter}" id="lblWorkc"/>
 										</header>
 									</Column>
-									<Column id="cControl">
+									<Column id="cControl" width="10%">
 										<header>
-											<Label text="Control Key" id="lblControl"/>
+											<Label text="{i18n>tableControlKey}" id="lblControl"/>
 										</header>
 									</Column>
-									<Column id="cDescription">
+									<Column id="cDescription" width="17%">
 										<header>
-											<Label text="Description" id="lblDescription"/>
+											<Label text="{i18n>tableOperationDescription}" id="lblDescription"/>
 										</header>
 									</Column>
-									<Column id="baseUnit">
+									<Column id="baseUnit" width="10%">
 										<header>
-											<Label text="BaseQuantity" id="lblBaseQuantity"/>
+											<Label text="{i18n>tableBaseQuantity}" id="lblBaseQuantity"/>
 										</header>
 									</Column>
 									<Column id="cSetup">
 										<header>
-											<Label text="Setup" id="lblSetup"/>
+											<Label text="{i18n>tableSetupTime}" id="lblSetup"/>
 										</header>
 									</Column>
 									<Column id="cMachine" popinHAlign="Initial">
 										<header>
-											<Label text="Machine" id="lblMachine"/>
+											<Label text="{i18n>tableMachineTime}" id="lblMachine"/>
 										</header>
 									</Column>
 									<Column id="cLabor">
 										<header>
-											<Label text="Labor" id="lblLabor"/>
+											<Label text="{i18n>tableLaborTime}" id="lblLabor"/>
 										</header>
 									</Column>
 								</columns>
@@ -79,10 +79,10 @@
 											<Input value="{routing>controlKey}" id="controlKey"/>
 										</cells>
 										<cells>
-											<TextArea value="{routing>operationDescription}" id="description"/>
+											<TextArea value="{routing>operationDescription}" id="description" wrapping="Off" height="2%" rows="1"/>
 										</cells>
 										<cells>
-											<Input value="{routing>baseQuantity}" id="baseQuantity"/>
+											<Input value="{routing>baseQuantity}" id="baseQuantity" fieldWidth="40%"/>
 										</cells>
 										<cells>
 											<Input value="{routing>setupTime}" id="setup" placeholder="..." description="{routing>setupUnit}" fieldWidth="60%" startSuggestion="2"/>
@@ -98,8 +98,8 @@
 								<infoToolbar>
 									<Toolbar width="100%" id="__toolbar2" design="Transparent">
 										<content>
-											<Title text="Operations" id="tableTitle" titleStyle="H4"/>
-											<ToolbarSpacer id="__spacer0"/><Button id="btnDeleteRow" color="white" icon="sap-icon://delete" press="DeleteSelectedRecord"/>
+											<Title text="{i18n>tableTitle}" id="tableTitle" titleStyle="H4"/>
+											<ToolbarSpacer id="__spacer0"/><Button id="btnDeleteRow" color="white" icon="sap-icon://delete" press="deleteSelectedRecord"/>
 										</content>
 									</Toolbar>
 								</infoToolbar>
@@ -107,10 +107,11 @@
 							    <core:CustomData key="w5g.dt.editable" value="true" id="__data20"/>
 							</customData>
 							</Table>
-							<CheckBox name="checkOverwrite" id="overwriteCheck" text="Overwrite existing operations"/>
-							<Button id="AddTemplate" text="Add to routings" press="_onAddTemplate" type="default"/>
-							<ComboBox id="comboTemplate" placeholder="Choose a template..." items="{template>/}">
-								<core:ListItem key="{template>routingGroupCode}" text="0{template>routingGroupCounter} {template&gt;description}"/>
+							
+							<CheckBox name="checkOverwrite" id="overwriteCheck" text="{i18n>overwriteText}"/>
+							<Button id="AddTemplate" text="{i18n>addToRoutingText}" press="onAddTemplate" type="default"/>
+							<ComboBox id="comboTemplate" placeholder="{i18n>templatePlaceholder}" items="{template>/}">
+								<core:ListItem key="{template>routingGroupCode}" text="{template>routingGroupCounter} {template&gt;description}"/>
 							</ComboBox>
 						</VBox>
 					</HBox>
@@ -118,8 +119,8 @@
 			<footer>
 			    <Bar id="__bar0">
 			        <contentRight>
-			            <Button text="Save" id="__button0" press="_onSaveRoutings" type="Accept"/>
-			            <Button text="Cancel" id="__button1" press="_onCancel" type="Reject"/>
+			            <Button text="{i18n>btnFooterSave}" id="__button0" press="onSaveRoutings" type="Accept"/>
+			            <Button text="{i18n>btnFooterCancel}" id="__button1" press="onCancel" type="Reject"/>
 			        </contentRight>
 			    </Bar>
 			</footer>

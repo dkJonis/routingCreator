@@ -29,7 +29,6 @@ sap.ui.define([
 		},
 		getRoutings: function(sMatnr, sPlant) {
 			
-
 			var d = $.Deferred();
 			
 			this.model.read("/Zppc_Cds_Routing(p_matnr='" + sMatnr + "',p_plant='" + sPlant + "')/Set", {
@@ -74,6 +73,24 @@ sap.ui.define([
 				}
 			});
 			return d.promise(); 
+		},
+		saveRoutings: function(createData) {
+			var d = $.Deferred();
+			
+			this.model.create("/routingCreateSet", createData, {
+				success: function(oData, check) 
+				{
+					check = true;
+					console.log("We've entered the success function on create");
+					d.resolve(oData);
+				},
+				error: function(oData, check)
+				{
+					check = false;
+					console.log("We've entered the error function on create");
+					d.resolve(oData);
+				}
+			});
 		}
 	});
 	

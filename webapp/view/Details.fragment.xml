@@ -4,9 +4,9 @@
 	xmlns:f="sap.ui.layout.form">
 	<Dialog
 		id="DetailsDialog"
-		title="Material Information">
+		title="{i18n>dialogTitle}">
 		<content>
-		<f:SimpleForm id="simpleFormChange" title="Details" editable="true" class="editableForm sapUiSmallMarginTopBottom">
+		<f:SimpleForm id="simpleFormChange" title="{i18n>formTitle}" editable="true" class="editableForm sapUiSmallMarginTopBottom">
 			<f:content>
 				<Label text="{i18n>layoutFormMaterialNumber}" labelFor="p_materialNumber"/>
 				<Input value="{MaterialNr}" id="p_materialNumber"/>
@@ -18,7 +18,7 @@
 		</f:SimpleForm>
 		</content>
 		<beginButton>
-			<Button id="Continue" text="Continue" press="_onContinue" type="Accept" />
+			<Button id="Continue" text="{i18n>btnContinue}" press="onContinue" type="Accept" />
 		</beginButton>
 	</Dialog>
 </core:FragmentDefinition>
