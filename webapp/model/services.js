@@ -27,7 +27,7 @@ sap.ui.define([
 			});
 			return d.promise();
 		},
-		getRoutings: function(sMatnr, sPlant) {
+		getRoutings: function(sMatnr, sPlant, sRevlv) {
 			
 			var d = $.Deferred();
 			
@@ -66,7 +66,7 @@ sap.ui.define([
 			
 			var d = $.Deferred();
 			
-			this.model.read("/ZPPC_GETMATDETAILS(p_matnr='" + matnr + "')/Set", {
+			this.model.read("/ZPPC_MATERIALDETAILS(p_matnr='" + matnr + "')/Set", {
 				success: function(oData)
 				{
 					d.resolve(oData.results);
@@ -78,19 +78,16 @@ sap.ui.define([
 			var d = $.Deferred();
 			
 			this.model.create("/routingCreateSet", createData, {
-				success: function(oData, check) 
+				success: function(oData) 
 				{
-					check = true;
-					console.log("We've entered the success function on create");
-					d.resolve(oData);
+					d.resolve(oData, true);
 				},
-				error: function(oData, check)
+				error: function(oData)
 				{
-					check = false;
-					console.log("We've entered the error function on create");
-					d.resolve(oData);
+					d.resolve(oData, false);
 				}
 			});
+			return d.promise(); 
 		}
 	});
 	

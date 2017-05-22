@@ -13,12 +13,12 @@
 				<Label text="{i18n>layoutFormPlant}"/>
 				<Input value="{Plant}" id="p_plant"/>
 				<Label text="{i18n>layoutFormRevision}"/>
-				<Input value="{Revision}" id="p_revision"/>
+				<Input value="{Revision}" id="p_revision" submit="_checkDataSubmit"/>
 			</f:content>
 		</f:SimpleForm>
 		</content>
 		<beginButton>
-			<Button id="Continue" text="{i18n>btnContinue}" press="onContinue" type="Accept" />
+			<Button id="Continue" text="{i18n>btnContinue}" press="onContinue" submit="onContinue" type="Accept" />
 		</beginButton>
 	</Dialog>
 </core:FragmentDefinition>

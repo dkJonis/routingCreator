@@ -3,7 +3,7 @@
 		<pages>
 			<Page title="{i18n>title}" id="overviewPage" backgroundDesign="Transparent">
 				<content>
-					<ObjectHeader title="{i18n>materialHeader} {params>/matnr}" number="Plant: {params>/plant}" intro="revlv: {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" fullScreenOptimized="true"/>
+					<ObjectHeader title="{i18n>materialNrHeader} {params>/matnr}" number="{i18n>materialPlantHeader} {selectedRouting>/task}" intro="{i18n>materialRevisionHeader} {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" fullScreenOptimized="true"/>
 					<HBox id="mainContainer" fitContainer="true" displayInline="true">
 						<VBox id="leftBox" width="25%">
 							<items>
@@ -103,9 +103,6 @@
 										</content>
 									</Toolbar>
 								</infoToolbar>
-							<customData>
-							    <core:CustomData key="w5g.dt.editable" value="true" id="__data20"/>
-							</customData>
 							</Table>
 							
 							<CheckBox name="checkOverwrite" id="overwriteCheck" text="{i18n>overwriteText}"/>

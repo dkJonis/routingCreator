@@ -18,7 +18,7 @@ sap.ui.define([
 		},
 		createRoutingModel: function() {
 			var oModel = new JSONModel();
-			oModel.setDefaultBindingMode("OneWay");
+			oModel.setDefaultBindingMode("TwoWay");
 			return oModel;
 		},
 		createTemplateModel: function() {
