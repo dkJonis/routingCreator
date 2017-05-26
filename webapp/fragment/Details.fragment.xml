@@ -11,9 +11,7 @@
 				<Label text="{i18n>layoutFormMaterialNumber}" labelFor="p_materialNumber"/>
 				<Input value="{MaterialNr}" id="p_materialNumber"/>
 				<Label text="{i18n>layoutFormPlant}"/>
-				<Input value="{Plant}" id="p_plant"/>
-				<Label text="{i18n>layoutFormRevision}"/>
-				<Input value="{Revision}" id="p_revision" submit="_checkDataSubmit"/>
+				<Input value="{Plant}" id="p_plant" submit="_checkDataSubmit"/>
 			</f:content>
 		</f:SimpleForm>
 		</content>

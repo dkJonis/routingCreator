@@ -52,16 +52,19 @@ sap.ui.define([
 				this._oView.addDependent(this._oDialog);
 			}
 			var that = this;
-
+			console.log(this.oView.byId("WorkcenterList"));
+			console.log(this.oView.byId("workcenterRecord"));
+				
 			// interactjs
 			interact(".draggable")
 				.draggable({
+					//manualStart: true,
 					// enable inertial throwing
 					inertia: false,
 					// keep the element within the area of it's parent
 					restrict: {
-						//restriction: "parent",
-						drag: this._oView.byId("mainContainer"),
+						restriction: that._oView.byId("mainContainer"),
+						drag: that._oView.byId("mainContainer"),
 						endOnly: true
 					},
 
@@ -88,7 +91,9 @@ sap.ui.define([
 					// keep the dragged position in the data-x/data-y attributes
 					x = (parseFloat(oTarget.getAttribute('data-x')) || 0) + event.dx,
 					y = (parseFloat(oTarget.getAttribute('data-y')) || 0) + event.dy;
-
+					console.log(oTarget.style[2]);
+				oTarget.style.overflow = "visible";
+				oTarget.style.zIndex = 0;
 				// translate the element
 				oTarget.style.webkitTransform =
 					oTarget.style.transform =
@@ -112,6 +117,8 @@ sap.ui.define([
 
 				ondropactivate: function(event) {
 					// add active dropzone feedback
+					console.log(event.target.style);
+					event.target.style.zIndex = 1;
 					event.target.classList.add("drop-active");
 				},
 				ondragenter: function(event) {
@@ -120,6 +127,7 @@ sap.ui.define([
 
 					// feedback the possibility of a drop
 					dropzoneElement.classList.add("drop-target");
+					event.relatedTarget.style.overflow = 'visible';
 					draggableElement.classList.add("can-drop");
 				},
 				ondragleave: function(event) {
@@ -169,14 +177,14 @@ sap.ui.define([
 
 			var sMatnr = this._oView.byId("p_materialNumber").getValue();
 			var sPlant = this._oView.byId("p_plant").getValue();
-			var sRevision = this._oView.byId("p_revision").getValue();
+			//var sRevision = this._oView.byId("p_revision").getValue();
 			var that = this;
 			var oParamModel = new sap.ui.model.json.JSONModel({
 				"matnr": sMatnr.toUpperCase(),
 				"plant": sPlant,
-				"revision": sRevision
+				//"revision": sRevision
 			});
-			if (sMatnr !== null && sPlant !== null && sRevision !== null && sMatnr !== "" && sPlant !== "" && sRevision !== "") {
+			if (sMatnr !== null && sPlant !== null && /*sRevision !== null &&*/ sMatnr !== "" && sPlant !== "" /*&& sRevision !== ""*/) {
 				this._oView.setModel(oParamModel, "params");
 
 				$.when(services.getWorkcenters(sPlant)).done(function(oData) {
@@ -266,11 +274,11 @@ sap.ui.define([
 				}
 				$.when(services.getTemplateItems(sRoutingGroupCounter, sRoutingGroupCode)).done(function(oData) {
 					that._oView.getModel("templateItems").setData(oData);
-
+					var teller = that._oView.getModel("templateItems").getData().length + 1;
 					for (var x in that._oView.getModel("templateItems").getData()) {
 						var item = that._oView.getModel("templateItems").getProperty("/" + x);
 						if (item !== null) {
-							item.operationNumber = that._oView.getModel("i18n").getResourceBundle().getText("operationNumber", [that._oView.getModel("templateItems").getData().length]);
+							item.operationNumber = that._oView.getModel("i18n").getResourceBundle().getText("operationNumber", [teller++]);
 							that._addToRoutingTable(item);
 						}
 
@@ -323,14 +331,13 @@ sap.ui.define([
 
 			this._oView.byId("p_materialNumber").setValue("");
 			this._oView.byId("p_plant").setValue("");
-			this._oView.byId("p_revision").setValue("");
 			this._oView.getModel("workcenter").setData(null);
 			this._oView.getModel("routing").setData(null);
 			this._oView.getModel("template").setData(null);
 			this._oView.getModel("params").setData(null);
 			this._oView.getModel("materialDetails").setData(null);
 			this._oView.byId("comboTemplate").setValue(null);
-
+			this._oView.byId("tableTitle").setText(this._oView.getModel("i18n").getResourceBundle().getText("updatedTableTitle", [0]));
 			//heropenen dialog.
 			this._oDialog.open();
 		},
@@ -345,9 +352,14 @@ sap.ui.define([
 		 */
 		_updateTableHeader: function() {
 			var title = this._oView.byId("tableTitle");
-			title.setText(this._oView.getModel("i18n").getResourceBundle().getText("updatedTableTitle", [this._oView.getModel("routing").getData()
-				.length
-			]));
+			if(this._oView.getModel("routing").getData().length !== 0)
+			{
+				title.setText(this._oView.getModel("i18n").getResourceBundle().getText("updatedTableTitle", [this._oView.getModel("routing").getData().length]));
+			}
+			else
+			{
+				title.setText(this._oView.getModel("i18n").getResourceBundle().getText("updatedTableTitle", [0]));
+			}
 		},
 
 		/**

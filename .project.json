@@ -9,7 +9,7 @@
     "targetFolder": "dist",
     "sourceFolder": "webapp",
     "buildRequired": true,
-    "lastBuildDateTime": "Mon, 22 May 2017 07:08:34 GMT"
+    "lastBuildDateTime": "Fri, 26 May 2017 14:07:32 GMT"
   },
   "generation": [
     {
@@ -61,6 +61,6 @@
   },
   "deploy": {
     "destination": "S4H",
-    "name": "Zroutingbuilder"
+    "name": "ZROUTINGBUILDER"
   }
 }

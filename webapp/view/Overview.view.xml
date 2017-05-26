@@ -3,22 +3,27 @@
 		<pages>
 			<Page title="{i18n>title}" id="overviewPage" backgroundDesign="Transparent">
 				<content>
-					<ObjectHeader title="{i18n>materialNrHeader} {params>/matnr}" number="{i18n>materialPlantHeader} {selectedRouting>/task}" intro="{i18n>materialRevisionHeader} {params>/revision}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" condensed="true" fullScreenOptimized="true"/>
-					<HBox id="mainContainer" fitContainer="true" displayInline="true">
-						<VBox id="leftBox" width="25%">
+					<ObjectHeader title="{i18n>materialNrHeader} {params&gt;/matnr}" id="materialHeader" backgroundDesign="Solid" titleLevel="H3" iconDensityAware="false" fullScreenOptimized="true" responsive="true">
+					    <attributes>
+					        <ObjectAttribute text="{i18n>materialPlantHeader} {params&gt;/plant}" id="plantHeader"/>
+					        <ObjectAttribute text="{i18n>materialTaskHeader} {selectedRouting&gt;/task}" id="taskHeader"/>
+					    </attributes>
+					</ObjectHeader>
+					<HBox id="mainContainer" fitContainer="true" displayInline="true" renderType="Bare">
+						<VBox id="leftBox" width="25%" renderType="Bare">
 							<items>
 							    <Toolbar width="100%" id="__toolbar3">
 							        <content>
-							            <Title text="{i18n>headerWorkcenter}" titleStyle="H4"/>
+							            <Title text="{i18n>headerWorkcenter}" class="sapUiSmallMargin" titleStyle="H4"/>
 							            <ToolbarSpacer id="__spacer1"/>
-							            <Button id="addWorkcenter" press="onAddWorkcenter" type="default" icon="sap-icon://add"/>
+							            <!--<Button id="addWorkcenter" press="onAddWorkcenter" type="default" icon="sap-icon://add"/>-->
 							        </content>
 							    </Toolbar>
 							</items>
 							<ScrollContainer vertical="true" height="85%" width="100%">
 								<List items="{workcenter>/}" id="WorkcenterList" growingThreshold="10" includeItemInSelection="true" mode="SingleSelectMaster" backgroundDesign="Transparent" rememberSelections="false">
 									<items id="workcenters">
-	<!-- record to be dragged -->		<StandardListItem class="draggable" title="{workcenter>workplace}" description="{workcenter>description}" adaptTitleSize="false"/>
+	<!-- record to be dragged -->		<StandardListItem id="workcenterRecord" class="draggable" title="{workcenter>workplace}" description="{workcenter>description}" adaptTitleSize="false"/>
 									</items>
 								</List>
 							</ScrollContainer>
@@ -26,7 +31,7 @@
 						<VBox direction="Column" displayInline="true">
 <!-- place to drop record --><Table class="dropzone" noDataText="{i18n>noTableItemsFound}" id="routingTable" items="{routing>/}" includeItemInSelection="true" mode="SingleSelectMaster" growingThreshold="4" growing="true" fixedLayout="false">
 								<columns>
-									<Column id="cOperation" width="10%">
+									<Column id="cOperation">
 										<header>
 											<Label text="{i18n>tableOperationNumber}" id="lblOperation"/>
 										</header>
@@ -41,7 +46,7 @@
 											<Label text="{i18n>tableControlKey}" id="lblControl"/>
 										</header>
 									</Column>
-									<Column id="cDescription" width="17%">
+									<Column id="cDescription" width="18%">
 										<header>
 											<Label text="{i18n>tableOperationDescription}" id="lblDescription"/>
 										</header>
@@ -79,7 +84,7 @@
 											<Input value="{routing>controlKey}" id="controlKey"/>
 										</cells>
 										<cells>
-											<TextArea value="{routing>operationDescription}" id="description" wrapping="Off" height="2%" rows="1"/>
+											<TextArea value="{routing>operationDescription}" id="description" height="2%" rows="1" wrapping="Off"/>
 										</cells>
 										<cells>
 											<Input value="{routing>baseQuantity}" id="baseQuantity" fieldWidth="40%"/>
@@ -104,12 +109,15 @@
 									</Toolbar>
 								</infoToolbar>
 							</Table>
-							
-							<CheckBox name="checkOverwrite" id="overwriteCheck" text="{i18n>overwriteText}"/>
-							<Button id="AddTemplate" text="{i18n>addToRoutingText}" press="onAddTemplate" type="default"/>
-							<ComboBox id="comboTemplate" placeholder="{i18n>templatePlaceholder}" items="{template>/}">
+							<HBox>
+							<CheckBox name="checkOverwrite" id="overwriteCheck" class="sapUiTinyMarginBegin" text="{i18n>overwriteText}"/>
+							<Button id="AddTemplate" class="sapUiTinyMarginBegin" text="{i18n>addToRoutingText}" press="onAddTemplate" type="default"/>
+							</HBox>
+						<items>
+						    <ComboBox id="comboTemplate" class="sapUiTinyMargin" placeholder="{i18n>templatePlaceholder}" items="{template>/}">
 								<core:ListItem key="{template>routingGroupCode}" text="{template>routingGroupCounter} {template&gt;description}"/>
 							</ComboBox>
+						</items>
 						</VBox>
 					</HBox>
 				</content>
